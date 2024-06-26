@@ -18,6 +18,8 @@ PORT=8080
 Run ```make makefile all``` in terminal. Once finishing you should see a PostgreSQL container running in the Containers list in Docker. If encounter the error "Can't reach database server at ...", try these 2 commands one by one:
 ```
 make docker
+```
+```
 npx prisma db pull
 ```
 
