@@ -22,4 +22,9 @@ make docker
 ```
 npx prisma db pull
 ```
+Now the database is running in your Docker image.
 
+**Step 5:**
+```
+npm start
+```
