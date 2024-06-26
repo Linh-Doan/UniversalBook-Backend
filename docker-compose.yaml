@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  postgres-db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: universal_book
+      POSTGRES_USER: dev_team
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - ./dataset:/docker-entrypoint-initdb.d
