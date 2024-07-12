@@ -4,5 +4,7 @@ docker:
 
 all:
 	make docker
-	sleep 1
+	sleep 3
 	npx prisma db pull
+	npx prisma generate
+	npx prisma db seed

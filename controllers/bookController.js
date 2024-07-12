@@ -1,73 +1,97 @@
-exports.checkId = (req, res, next, val) => {
-    console.log(`Id is ${val}`)
-    if (req.params.id > 10) {
-        return res.status(404).json({
-            status: 'fail',
-            message: 'invalid ID'
+const prisma = require('../lib/prisma');
+
+exports.getAllBooks = async (req, res) => {
+    try {
+        const books = await prisma.book.findMany();
+        res.status(200).json({
+        status: 'success',
+        results: books.length,
+        data: {books}
+        })
+    } catch(err) {
+        res.status(404).json({
+            statue: "fail",
+            message: err
         })
     }
-    next();
+    
 }
 
-exports.checkBody = (req, res, next) => {
-    if (!req.body.name) {
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Missing name'
+exports.createBook = async (req, res) => {
+    try {
+        const newBook = await prisma.book.create({
+            data: req.body
+    
         })
-    }
-    next();
-}
-
-exports.getAllBooks = (req, res) => {
-    res.status(200).json({
-        status: 'success',
-        results: 3,
-        data: {
-            books: [
-                { bookId: "1", bookName: "Book Example 1"},
-                { bookId: "2", bookName: "Book Example 2"},
-                { bookId: "3", bookName: "Book Example 3"}
-            ]
-        }
-    })
-}
-
-exports.createBook = (req, res) => {
-    res.status(201).json({
-        status: 'success',
-        data: {
-            books: [
-                { bookId: "4", bookName: "Book Example 4"}
-            ]
-        }
-    })
-}
-
-exports.getBook = (req, res) => {
-    const id = req.params.id
-    res.status(200).json({
-        status: "success",
-        data: {
-            book: {
-                bookId: "4", bookName: "Book Example 4"
+        res.status(200).json({
+            status: 'success',
+            data: {
+                book: newBook
             }
-        }
-    })
+        })
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: 'Invalid data sent'
+        })
+    }
 }
 
-exports.updateBook = (req, res) => {
-    res.status(200).json({
-        status: 'success',
-        data: {
-            book: '<Updated book>'
-        }
-    })
+exports.getBook = async(req, res) => {
+    try {
+        const book = await prisma.book.findUnique({
+            where: {
+                book_id: req.params.id
+            }
+        })
+        res.status(200).json({
+            status: "success",
+            data: {book}
+        })
+    } catch (err) {
+        res.status(404).json({
+            statue: "fail",
+            message: err
+        })
+    }
 }
 
-exports.deleteBook = (req, res) => {
-    res.status(204).json({
-        status: 'success',
-        data: null
-    })
+exports.updateBook = async (req, res) => {
+    try {
+        const updatedBook = await prisma.book.update({
+            where: {
+                book_id: req.params.id
+            },
+            data: req.body
+        })
+        res.status(200).json({
+            status: "success",
+            data: {updatedBook}
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(404).json({
+            statue: "fail",
+            message: err
+        })
+    }
+}
+
+exports.deleteBook = async (req, res) => {
+    try {
+        await prisma.book.delete({
+            where: {
+                book_id: req.params.id
+            }
+        })
+        res.status(204).json({
+            status: 'success',
+            data: null
+        })
+    } catch (err) {
+        res.status(404).json({
+            statue: "fail",
+            message: err
+        })
+    }
 }

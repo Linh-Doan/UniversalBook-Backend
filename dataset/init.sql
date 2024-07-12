@@ -55,25 +55,25 @@ create table account_author_group_member (
 );
 
 create table genre (
-	genre_id UUID primary key,
+	genre_id UUID DEFAULT gen_random_uuid() primary key,
 	genre_name varchar(50) not null,
 	genre_image_url varchar(100),
-	created_on timestamp not null,
+	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null,
 	genre_rating integer
 );
 
 create table book (
-	book_id UUID primary key,
+	book_id UUID DEFAULT gen_random_uuid() primary key,
 	book_name varchar(50) not null,
 	author_group_id UUID not null references author_group(author_group_id) on delete cascade,
 	genre_id UUID not null references genre(genre_id) on delete cascade,
 	summary_text varchar(200),
 	original_book_id UUID,
 	book_image_url varchar(100),
-	is_copiable boolean not null,
-	is_published boolean not null,
-	is_flagged_inappropriate boolean not null,
-	created_on timestamp not null
+	is_copiable boolean DEFAULT FALSE not null,
+	is_published boolean DEFAULT FALSE not null,
+	is_flagged_inappropriate boolean DEFAULT FALSE not null,
+	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null
 );
 
 alter table book add constraint book_original_book_fk foreign key(original_book_id) references book(book_id) on delete set null;
