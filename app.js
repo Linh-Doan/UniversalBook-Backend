@@ -1,15 +1,13 @@
 const express = require('express');
-const bookRouter = require('./routes/bookRoutes')
-const userRouter = require('./routes/userRoutes')
+const cors = require('cors');
+const bookRouter = require('./routes/bookRoutes');
+const userRouter = require('./routes/userRoutes');
 const app = express();
 
 //MIDDLEWARES
 app.use(express.json());
-app.use(express.static(`${__dirname}/public`))
-app.use((req, res, next) => {
-    console.log('Hello from middleware');
-    next();
-})
+app.use(cors());
+app.use(express.static(`${__dirname}/public`));
 
 //ROUTES
 app.use('/api/v1/users', userRouter);
