@@ -147,3 +147,5 @@ create table account_chapter_follow (
 		chapter_id
 	)
 );
+
+commit;
