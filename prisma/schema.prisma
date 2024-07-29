@@ -9,7 +9,7 @@ datasource db {
 
 model account {
   account_id                  String                        @id @db.Uuid
-  email                       String                        @db.VarChar(50)
+  email                       String                        @db.VarChar(50) @unique
   account_password            String                        @db.VarChar(60)
   account_language            String                        @db.VarChar(3)
   user_role_id                String                        @db.Uuid
