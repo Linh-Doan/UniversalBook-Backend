@@ -13,7 +13,10 @@ app.use(express.static(`${__dirname}/public`));
 //ROUTES
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/books', bookRouter);
-app.use('/api/v1/authorgroup', authorGroupRouter)
+app.use('/api/v1/authorgroup', authorGroupRouter);
+app.get('/', (req, res) => {
+    res.send("Hello world");
+})
 
 //START SERVER
 module.exports = app;
