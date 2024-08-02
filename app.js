@@ -13,7 +13,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/books', bookRouter);
 app.get('/', (req, res) => {
-    res.send("Hello world");
+    res.send("Universal Book Backend");
 })
 
 //START SERVER
