@@ -9,9 +9,9 @@ datasource db {
 
 model account {
   account_id                  String                        @id @db.Uuid
-  email                       String                        @db.VarChar(50) @unique
+  account_name                String?                       @db.VarChar(50)
+  email                       String                        @unique @db.VarChar(50)
   account_password            String                        @db.VarChar(60)
-  account_name                String                        @db.VarChar(50)
   account_language            String                        @db.VarChar(3)
   user_role_id                String                        @db.Uuid
   user_role                   user_role                     @relation(fields: [user_role_id], references: [user_role_id], onDelete: NoAction, onUpdate: NoAction)
