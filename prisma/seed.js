@@ -33,6 +33,7 @@ const main = async () => {
         create: {
             account_id: "3c23729a-820b-4cfe-9b29-70132bac0c74",
             email: "test1@gmail.com",
+            account_name: "test account 1",
             account_password: "12345",
             account_language: "ENG",
             user_role_id: adminRole.user_role_id,
@@ -46,6 +47,7 @@ const main = async () => {
         create: {
             account_id: "5fc61a7c-f196-417e-9bc7-61132b15cd59",
             email: "test2@gmail.com",
+            account_name: "test account 2",
             account_password: "12345",
             account_language: "ENG",
             user_role_id: adminRole.user_role_id,

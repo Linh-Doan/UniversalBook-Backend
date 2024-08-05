@@ -38,6 +38,8 @@ exports.createAuthorGroup = async (req, res) => {
             }
         })
     } catch (err) {
+        console.log(err)
+        console.log(req.body)
         res.status(400).json({
             status: 'fail',
             message: 'Invalid data sent'

@@ -11,6 +11,7 @@ model account {
   account_id                  String                        @id @db.Uuid
   email                       String                        @db.VarChar(50) @unique
   account_password            String                        @db.VarChar(60)
+  account_name                String                        @db.VarChar(50)
   account_language            String                        @db.VarChar(3)
   user_role_id                String                        @db.Uuid
   user_role                   user_role                     @relation(fields: [user_role_id], references: [user_role_id], onDelete: NoAction, onUpdate: NoAction)
@@ -71,6 +72,7 @@ model account_genre_follow {
 
 model author_group {
   author_group_id             String                        @id @db.Uuid
+  author_group_name           String?                       @db.VarChar(50)
   author_group_rating         Int?
   author_group_image_url      String?                       @db.VarChar(100)
   account_author_group_follow account_author_group_follow[]

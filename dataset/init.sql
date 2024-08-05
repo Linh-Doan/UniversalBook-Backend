@@ -33,6 +33,7 @@ create table user_role (
 
 create table account (
 	account_id UUID primary key,
+    account_name varchar(50),
 	email varchar(50) not null,
 	account_password varchar(60) not null,
 	account_language varchar(3) not null,
@@ -41,6 +42,7 @@ create table account (
 
 create table author_group (
 	author_group_id UUID primary key,
+    author_group_name varchar(50),
 	author_group_rating integer,
 	author_group_image_url varchar(100)
 );
