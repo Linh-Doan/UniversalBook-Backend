@@ -6,7 +6,7 @@ const router = express.Router();
 router
     .route('/')
     .get(chapterController.getAllChapters)
-    .post(chapterController.createChapters);
+    .post(chapterController.createChapter);
 
 router
     .route('/:id')
