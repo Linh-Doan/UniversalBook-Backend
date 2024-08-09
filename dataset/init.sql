@@ -73,7 +73,9 @@ create table book (
 	is_copiable boolean DEFAULT FALSE not null,
 	is_published boolean DEFAULT FALSE not null,
 	is_flagged_inappropriate boolean DEFAULT FALSE not null,
-	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null
+	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null,
+	rating integer DEFAULT 0,
+	rating_count integer DEFAULT 0
 );
 
 alter table book add constraint book_original_book_fk foreign key(original_book_id) references book(book_id) on delete set null;

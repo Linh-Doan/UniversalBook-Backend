@@ -17,6 +17,52 @@ exports.getAllBooks = async (req, res) => {
     
 }
 
+exports.getTopRatedBooks = async (req, res) => {
+    try {
+        const books = await prisma.book.findMany({
+            orderBy: [
+                {
+                    rating: 'desc'
+                }
+            ]
+        });
+        res.status(200).json({
+        status: 'success',
+        results: books.length,
+        data: {books}
+        })
+    } catch(err) {
+        console.log(err)
+        res.status(404).json({
+            statue: "fail",
+            message: err
+        })
+    }
+
+}
+
+exports.getLatestBooks = async (req, res) => {
+    try {
+        const books = await prisma.book.findMany({
+            orderBy: [
+                {
+                    created_on: 'desc'
+                }
+            ]
+        });
+        res.status(200).json({
+        status: 'success',
+        results: books.length,
+        data: {books}
+        })
+    } catch(err) {
+        res.status(404).json({
+            statue: "fail",
+            message: err
+        })
+    } 
+}
+
 exports.createBook = async (req, res) => {
     try {
         const newBook = await prisma.book.create({

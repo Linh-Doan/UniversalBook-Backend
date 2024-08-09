@@ -8,6 +8,8 @@ router
     .get(bookController.getAllBooks)
     .post(bookController.createBook);
 
+router.route('/top-rated').get(bookController.getTopRatedBooks);
+router.route('/latest').get(bookController.getLatestBooks);
 router
     .route('/:id')
     .get(bookController.getBook)
