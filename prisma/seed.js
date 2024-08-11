@@ -186,7 +186,7 @@ const main = async () =>{
       });
     const chapter1 = await prisma.chapter.create({
         data: {
-          chapter_id: '6df19d00-5147-403d-bf84-cf8400f67836',
+          
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of Luminous Veil.',
           chapter_rating: 4,
@@ -198,7 +198,7 @@ const main = async () =>{
     
       const chapter2 = await prisma.chapter.create({
         data: {
-          chapter_id: '7aa19d00-6258-504d-bf84-cf8400f78945',
+      
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of Songs of the Starbound.',
           chapter_rating: 3,
@@ -210,7 +210,7 @@ const main = async () =>{
     
       const chapter3 = await prisma.chapter.create({
         data: {
-          chapter_id: '6df19d00-7379-504d-bf84-cf8400f89056',
+      
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of The Midnight Tapestry.',
           chapter_rating: 5,
@@ -222,7 +222,7 @@ const main = async () =>{
     
       const chapter4 = await prisma.chapter.create({
         data: {
-          chapter_id: '8aa19d00-7379-504d-bf84-cf8400f89056',
+      
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of Harbinger of the Crimson Dawn.',
           chapter_rating: 4,
@@ -234,7 +234,7 @@ const main = async () =>{
     
       const chapter5 = await prisma.chapter.create({
         data: {
-          chapter_id: '8bb200e1-8480-504d-bf84-cf8400f89026',
+        
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of Echoes of the Crystal Cavern.',
           chapter_rating: 4,
