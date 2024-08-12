@@ -81,7 +81,7 @@ create table book (
 alter table book add constraint book_original_book_fk foreign key(original_book_id) references book(book_id) on delete set null;
 
 create table chapter ( 
-	chapter_id UUID primary key,
+	chapter_id UUID DEFAULT gen_random_uuid() primary key,
 	chapter_sequence integer not null,
 	chapter_content text not null,
 	chapter_rating integer,

@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const bookRouter = require('./routes/bookRoutes');
-const userRouter = require('./routes/userRoutes');
+const bookRouter = require('./routes/bookRoutes')
+const userRouter = require('./routes/userRoutes')
+const chapterRouter = require('./routes/chapterRoutes')
 const app = express();
 
 //MIDDLEWARES
@@ -12,9 +13,11 @@ app.use(express.static(`${__dirname}/public`));
 //ROUTES
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/books', bookRouter);
+app.use('/api/v1/chapters', chapterRouter)
 app.get('/', (req, res) => {
     res.send("Hello world");
 })
+ 
 
 //START SERVER
 module.exports = app;
