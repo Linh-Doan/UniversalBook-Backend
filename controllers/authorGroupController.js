@@ -27,8 +27,13 @@ exports.getAllAuthorGroups = async (req, res) => {
 
 exports.createAuthorGroup = async (req, res) => {
     try {
+        let authorGroupReq = {
+            ...res.body,
+            author_group_id: crypto.randomUUID().toString()
+        }
+        console.log(res.body)
         const newAuthorGroup = await prisma.author_group.create({
-            data: req.body
+            data: authorGroupReq
     
         })
         res.status(200).json({
