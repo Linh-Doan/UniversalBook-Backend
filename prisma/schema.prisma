@@ -8,7 +8,7 @@ datasource db {
 }
 
 model account {
-  account_id                  String                        @id @db.Uuid
+  account_id                  String                        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   account_name                String?                       @db.VarChar(50)
   email                       String                        @unique @db.VarChar(50)
   account_password            String                        @db.VarChar(60)
@@ -71,7 +71,7 @@ model account_genre_follow {
 }
 
 model author_group {
-  author_group_id             String                        @id @db.Uuid
+  author_group_id             String                        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   author_group_name           String?                       @db.VarChar(50)
   author_group_rating         Int?
   author_group_image_url      String?                       @db.VarChar(100)

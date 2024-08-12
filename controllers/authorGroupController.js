@@ -27,13 +27,8 @@ exports.getAllAuthorGroups = async (req, res) => {
 
 exports.createAuthorGroup = async (req, res) => {
     try {
-        let authorGroupReq = {
-            ...res.body,
-            author_group_id: crypto.randomUUID().toString()
-        }
-        console.log(res.body)
         const newAuthorGroup = await prisma.author_group.create({
-            data: authorGroupReq
+            data: req.body
     
         })
         res.status(200).json({
@@ -43,8 +38,6 @@ exports.createAuthorGroup = async (req, res) => {
             }
         })
     } catch (err) {
-        console.log(err)
-        console.log(req.body)
         res.status(400).json({
             status: 'fail',
             message: 'Invalid data sent'
