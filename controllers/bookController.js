@@ -4,9 +4,9 @@ exports.getAllBooks = async (req, res) => {
     try {
         const books = await prisma.book.findMany();
         res.status(200).json({
-        status: 'success',
-        results: books.length,
-        data: {books}
+            status: 'success',
+            results: books.length,
+            data: {books}
         })
     } catch(err) {
         res.status(404).json({
@@ -88,6 +88,10 @@ exports.getBook = async(req, res) => {
         const book = await prisma.book.findUnique({
             where: {
                 book_id: req.params.id
+            },
+            include: {
+                author_group: true,
+                genre: true
             }
         })
         res.status(200).json({

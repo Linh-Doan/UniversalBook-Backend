@@ -7,14 +7,15 @@ const main = async () => {
         update: {},
         create: {
             genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
-            genre_name: 'fiction'
+            genre_name: 'Fiction'
         }
     });
     const author1 = await prisma.author_group.upsert({
         where: {author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836'},
         update: {},
         create: {
-            author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836'
+            author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+            author_group_name: 'Inkwell Society'
         }
     });
 
@@ -190,112 +191,126 @@ const main = async () => {
         },
       });
     
-      const book14 = await prisma.book.create({
-        data: {
-          book_id: '0aa0b2ff-a025-47f0-ac47-12864b1d4c35',
-          book_name: 'Songs of the Starbound',
-          author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
-          genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
-          book_image_url: '/img/book2.jpeg',
-          summary_text:
-            'In a galaxy where music controls the stars, a rogue bard must harness this cosmic symphony to prevent an interstellar war. His melodies hold the key to unity or destruction.',
-        },
-      });
-    
-      const book15 = await prisma.book.create({
-        data: {
-          book_id: 'fa3b26b3-1250-432c-8a17-f1593a256708',
-          book_name: 'The Midnight Tapestry',
-          author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
-          genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
-          book_image_url: '/img/book3.jpeg',
-          summary_text:
-            "In a realm woven from dreams, a weaver's creation goes rogue, threatening the fabric of reality. She must navigate the dreamscape to reclaim control and restore balance.",
-        },
-      });
-    
-      const book16 = await prisma.book.create({
-        data: {
-          book_id: '9934ff55-1c44-44e1-875f-f7762d774fd4',
-          book_name: 'Harbinger of the Crimson Dawn',
-          author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
-          genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
-          book_image_url: '/img/book4.jpeg',
-          summary_text:
-            'An ancient prophecy foretells the rise of a hero marked by a crimson sun. A reluctant warrior must embrace his destiny to save his kingdom from an impending apocalypse.',
-        },
-      });
-    
-      const book17 = await prisma.book.create({
-        data: {
-          book_id: 'df2c39f0-d3bc-4d16-b803-c4a9a20a656d',
-          book_name: 'Echoes of the Crystal Cavern',
-          author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
-          genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
-          book_image_url: '/img/book5.jpeg',
-          summary_text:
-            "Deep within a mystical cavern, crystalline echoes reveal forgotten histories and hidden dangers. A brave explorer uncovers a secret that could reshape her world's future.",
-        },
-      });
-    const chapter1 = await prisma.chapter.create({
-        data: {
-          
-          chapter_sequence: 1,
-          chapter_content: 'This is chapter 1 contents of Luminous Veil.',
-          chapter_rating: 4,
-          chapter_image_url: '/img/book1.jpeg',
-          created_on: new Date('2024-08-05'),
-          book_id: '7f1de43d-91d5-4cb9-8e42-066673bdc238',
-        },
-      });
-    
-      const chapter2 = await prisma.chapter.create({
-        data: {
-      
-          chapter_sequence: 1,
-          chapter_content: 'This is chapter 1 contents of Songs of the Starbound.',
-          chapter_rating: 3,
-          chapter_image_url: '/img/book2.jpeg',
-          created_on: new Date('2024-08-05'),
-          book_id: '0aa0b2ff-a025-47f0-ac47-12864b1d4c35',
-        },
-      });
-    
-      const chapter3 = await prisma.chapter.create({
-        data: {
-      
-          chapter_sequence: 1,
-          chapter_content: 'This is chapter 1 contents of The Midnight Tapestry.',
-          chapter_rating: 5,
-          chapter_image_url: '/img/book3.jpeg',
-          created_on: new Date('2024-08-05'),
-          book_id: 'fa3b26b3-1250-432c-8a17-f1593a256708',
-        },
-      });
-    
-      const chapter4 = await prisma.chapter.create({
-        data: {
-      
-          chapter_sequence: 1,
-          chapter_content: 'This is chapter 1 contents of Harbinger of the Crimson Dawn.',
-          chapter_rating: 4,
-          chapter_image_url: '/img/book4.jpeg',
-          created_on: new Date('2024-08-05'),
-          book_id: '9934ff55-1c44-44e1-875f-f7762d774fd4',
-        },
-      });
-    
-      const chapter5 = await prisma.chapter.create({
-        data: {
+    const book14 = await prisma.book.create({
+    data: {
+        book_id: '0aa0b2ff-a025-47f0-ac47-12864b1d4c35',
+        book_name: 'Songs of the Starbound',
+        author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+        genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
+        book_image_url: '/img/book2.jpeg',
+        summary_text:
+        'In a galaxy where music controls the stars, a rogue bard must harness this cosmic symphony to prevent an interstellar war. His melodies hold the key to unity or destruction.',
+    },
+    });
+
+    const book15 = await prisma.book.create({
+    data: {
+        book_id: 'fa3b26b3-1250-432c-8a17-f1593a256708',
+        book_name: 'The Midnight Tapestry',
+        author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+        genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
+        book_image_url: '/img/book3.jpeg',
+        summary_text:
+        "In a realm woven from dreams, a weaver's creation goes rogue, threatening the fabric of reality. She must navigate the dreamscape to reclaim control and restore balance.",
+    },
+    });
+
+    const book16 = await prisma.book.create({
+    data: {
+        book_id: '9934ff55-1c44-44e1-875f-f7762d774fd4',
+        book_name: 'Harbinger of the Crimson Dawn',
+        author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+        genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
+        book_image_url: '/img/book4.jpeg',
+        summary_text:
+        'An ancient prophecy foretells the rise of a hero marked by a crimson sun. A reluctant warrior must embrace his destiny to save his kingdom from an impending apocalypse.',
+    },
+    });
+
+    const book17 = await prisma.book.create({
+    data: {
+        book_id: 'df2c39f0-d3bc-4d16-b803-c4a9a20a656d',
+        book_name: 'Echoes of the Crystal Cavern',
+        author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+        genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
+        book_image_url: '/img/book5.jpeg',
+        summary_text:
+        "Deep within a mystical cavern, crystalline echoes reveal forgotten histories and hidden dangers. A brave explorer uncovers a secret that could reshape her world's future.",
+    },
+    });
+const chapter1 = await prisma.chapter.create({
+    data: {
         
-          chapter_sequence: 1,
-          chapter_content: 'This is chapter 1 contents of Echoes of the Crystal Cavern.',
-          chapter_rating: 4,
-          chapter_image_url: '/img/book5.jpeg',
-          created_on: new Date('2024-08-05'),
-          book_id: 'df2c39f0-d3bc-4d16-b803-c4a9a20a656d',
+        chapter_sequence: 1,
+        chapter_content: 'This is chapter 1 contents of Luminous Veil.',
+        chapter_rating: 4,
+        chapter_image_url: '/img/book1.jpeg',
+        created_on: new Date('2024-08-05'),
+        book_id: '7f1de43d-91d5-4cb9-8e42-066673bdc238',
+    },
+    });
+
+    const chapter2 = await prisma.chapter.create({
+    data: {
+    
+        chapter_sequence: 1,
+        chapter_content: 'This is chapter 1 contents of Songs of the Starbound.',
+        chapter_rating: 3,
+        chapter_image_url: '/img/book2.jpeg',
+        created_on: new Date('2024-08-05'),
+        book_id: '0aa0b2ff-a025-47f0-ac47-12864b1d4c35',
+    },
+    });
+
+    const chapter3 = await prisma.chapter.create({
+    data: {
+    
+        chapter_sequence: 1,
+        chapter_content: 'This is chapter 1 contents of The Midnight Tapestry.',
+        chapter_rating: 5,
+        chapter_image_url: '/img/book3.jpeg',
+        created_on: new Date('2024-08-05'),
+        book_id: 'fa3b26b3-1250-432c-8a17-f1593a256708',
+    },
+    });
+
+    const chapter4 = await prisma.chapter.create({
+    data: {
+    
+        chapter_sequence: 1,
+        chapter_content: 'This is chapter 1 contents of Harbinger of the Crimson Dawn.',
+        chapter_rating: 4,
+        chapter_image_url: '/img/book4.jpeg',
+        created_on: new Date('2024-08-05'),
+        book_id: '9934ff55-1c44-44e1-875f-f7762d774fd4',
+    },
+    });
+
+    const chapter5 = await prisma.chapter.create({
+    data: {
+    
+        chapter_sequence: 1,
+        chapter_content: 'This is chapter 1 contents of Echoes of the Crystal Cavern.',
+        chapter_rating: 4,
+        chapter_image_url: '/img/book5.jpeg',
+        created_on: new Date('2024-08-05'),
+        book_id: 'df2c39f0-d3bc-4d16-b803-c4a9a20a656d',
+    },
+    });
+    const accountBookFollow1 = await prisma.account_book_follow.upsert({
+        where: {
+            account_id_book_id: {
+                account_id: "3c23729a-820b-4cfe-9b29-70132bac0c74",
+                book_id: "fa3b26b3-1250-432c-8a17-f1593a256708"
+            }
         },
-      });
+        update: {},
+        create: {
+            account_id: "3c23729a-820b-4cfe-9b29-70132bac0c74",
+            book_id: "fa3b26b3-1250-432c-8a17-f1593a256708" 
+        }
+    });
+
 };
 main()
     .then(async () => {
