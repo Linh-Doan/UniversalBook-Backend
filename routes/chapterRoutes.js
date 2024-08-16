@@ -13,5 +13,13 @@ router
     .get(chapterController.getChapter)
     .patch(chapterController.updateChapter)
     .delete(chapterController.deleteChapter);
+ 
+router
+    .route('/top-rated')
+    .get(chapterController.getTopRatedChapters);
 
-module.exports = router
+router
+    .route('/latest')
+    .get(chapterController.getLatestChapters);
+
+module.exports = router;
