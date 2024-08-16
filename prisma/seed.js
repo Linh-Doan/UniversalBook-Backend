@@ -63,7 +63,7 @@ const main = async () => {
             author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
             genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book1.jpeg',
-            rating: 24,
+            rating: 4.3,
             rating_count: 3,
             summary_text: 'A young sorceress discovers a hidden dimension behind a veil of light, unlocking ancient secrets and untold power. Her journey unveils truths that could alter the fate of her world.'
         }
@@ -74,7 +74,7 @@ const main = async () => {
             author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
             genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book2.jpeg',
-            rating: 28,
+            rating: 4.7,
             rating_count: 3,
             summary_text: 'In a galaxy where music controls the stars, a rogue bard must harness this cosmic symphony to prevent an interstellar war. His melodies hold the key to unity or destruction'
         }
@@ -85,7 +85,7 @@ const main = async () => {
             author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
             genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book3.jpeg',
-            rating: 30,
+            rating: 5,
             rating_count: 3,
             summary_text: 'In a realm woven from dreams, a weaver\'s creation goes rogue, threatening the fabric of reality. She must navigate the dreamscape to reclaim control and restore balance.'
         }
@@ -125,7 +125,7 @@ const main = async () => {
             author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
             genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book7.jpeg',
-            rating: 25,
+            rating: 4.6,
             rating_count: 3,
             summary_text: 'In a land where the aurora\'s colors dictate life and death, a mute painter discovers a way to communicate through her art. Her creations might be the key to ending a silent war.'
         }

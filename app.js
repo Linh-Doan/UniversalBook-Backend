@@ -4,7 +4,8 @@ const authorGroupRouter = require('./routes/authorGroupRoutes');
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
 const chapterRouter = require('./routes/chapterRoutes');
-const accountBookFollowRouter = require('./routes/accountBookFollowRoutes')
+const accountBookFollowRouter = require('./routes/accountBookFollowRoutes');
+const bookCommentRouter = require('./routes/bookCommentRoutes');
 const app = express();
 
 //MIDDLEWARES
@@ -18,6 +19,7 @@ app.use('/api/v1/books', bookRouter);
 app.use('/api/v1/authorgroup', authorGroupRouter);
 app.use('/api/v1/chapters', chapterRouter);
 app.use('/api/v1/follow/book', accountBookFollowRouter);
+app.use('/api/v1/comment/book', bookCommentRouter);
 app.get('/', (req, res) => {
     res.send("Hello world");
 })

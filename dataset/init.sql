@@ -43,7 +43,7 @@ create table account (
 create table author_group (
 	author_group_id UUID DEFAULT gen_random_uuid() primary key,
     author_group_name varchar(50),
-	author_group_rating integer,
+	author_group_rating numeric(3,2),
 	author_group_image_url varchar(100)
 );
 
@@ -61,7 +61,7 @@ create table genre (
 	genre_name varchar(50) not null,
 	genre_image_url varchar(100),
 	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null,
-	genre_rating integer
+	genre_rating numeric(3,2)
 );
 
 create table book (
@@ -76,7 +76,7 @@ create table book (
 	is_published boolean DEFAULT FALSE not null,
 	is_flagged_inappropriate boolean DEFAULT FALSE not null,
 	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null,
-	rating integer DEFAULT 0,
+	rating numeric(3,2) DEFAULT 0,
 	rating_count integer DEFAULT 0
 );
 
@@ -86,7 +86,7 @@ create table chapter (
 	chapter_id UUID DEFAULT gen_random_uuid() primary key,
 	chapter_sequence integer not null,
 	chapter_content text not null,
-	chapter_rating integer,
+	chapter_rating numeric(3,2),
 	chapter_image_url varchar(100),
 	created_on timestamp not null,
 	book_id UUID not null references book(book_id) on delete cascade
@@ -108,8 +108,9 @@ create table chapter_comment (
 );
 
 create table book_comment (
-	book_comment_id UUID primary key,
+	book_comment_id UUID DEFAULT gen_random_uuid() primary key,
 	book_comment_text varchar(255) not null,
+	book_rating integer not null,
 	book_id UUID not null references book(book_id) on delete cascade,
 	account_id UUID not null references account(account_id) on delete cascade
 );
