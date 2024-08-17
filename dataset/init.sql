@@ -68,7 +68,6 @@ create table book (
 	book_id UUID DEFAULT gen_random_uuid() primary key,
 	book_name varchar(50) not null,
 	author_group_id UUID not null references author_group(author_group_id) on delete cascade,
-	genre_id UUID not null references genre(genre_id) on delete cascade,
 	summary_text varchar(200),
 	original_book_id UUID,
 	book_image_url varchar(100),
@@ -78,6 +77,15 @@ create table book (
 	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null,
 	rating numeric(3,2) DEFAULT 0,
 	rating_count integer DEFAULT 0
+);
+
+create table book_genre (
+	book_id UUID not null references book(book_id) on delete cascade,
+	genre_id UUID not null references genre(genre_id) on delete cascade,
+	primary key(
+		book_id,
+		genre_id
+	)
 );
 
 alter table book add constraint book_original_book_fk foreign key(original_book_id) references book(book_id) on delete set null;
