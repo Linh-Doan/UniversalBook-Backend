@@ -80,15 +80,17 @@ create table book (
 
 alter table book add constraint book_original_book_fk foreign key(original_book_id) references book(book_id) on delete set null;
 
-create table chapter ( 
-	chapter_id UUID DEFAULT gen_random_uuid() primary key,
-	chapter_sequence integer not null,
-	chapter_content text not null,
-	chapter_rating integer,
-	chapter_image_url varchar(100),
-	created_on timestamp not null,
-	book_id UUID not null references book(book_id) on delete cascade
+CREATE TABLE chapter (
+    chapter_id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    chapter_name VARCHAR(255) NOT NULL,
+    chapter_sequence INTEGER NOT NULL,
+    chapter_content TEXT NOT NULL,
+    chapter_rating INTEGER,
+    chapter_image_url VARCHAR(100),
+    created_on TIMESTAMP NOT NULL,
+    book_id UUID NOT NULL REFERENCES book(book_id) ON DELETE CASCADE
 );
+
 
 -- Comment System
 create table genre_comment (

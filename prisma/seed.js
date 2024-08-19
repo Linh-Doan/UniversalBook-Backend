@@ -198,9 +198,9 @@ const main = async () =>{
             "Deep within a mystical cavern, crystalline echoes reveal forgotten histories and hidden dangers. A brave explorer uncovers a secret that could reshape her world's future.",
         },
       });
-    const chapter1 = await prisma.chapter.create({
+      const chapter1 = await prisma.chapter.create({
         data: {
-          
+          chapter_name: 'The Luminous Veil',
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of Luminous Veil.',
           chapter_rating: 4,
@@ -209,10 +209,10 @@ const main = async () =>{
           book_id: '7f1de43d-91d5-4cb9-8e42-066673bdc238',
         },
       });
-    
+      
       const chapter2 = await prisma.chapter.create({
         data: {
-      
+          chapter_name: 'Songs of the Starbound',
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of Songs of the Starbound.',
           chapter_rating: 3,
@@ -221,10 +221,10 @@ const main = async () =>{
           book_id: '0aa0b2ff-a025-47f0-ac47-12864b1d4c35',
         },
       });
-    
+      
       const chapter3 = await prisma.chapter.create({
         data: {
-      
+          chapter_name: 'The Midnight Tapestry',
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of The Midnight Tapestry.',
           chapter_rating: 5,
@@ -233,10 +233,10 @@ const main = async () =>{
           book_id: 'fa3b26b3-1250-432c-8a17-f1593a256708',
         },
       });
-    
+      
       const chapter4 = await prisma.chapter.create({
         data: {
-      
+          chapter_name: 'Harbinger of the Crimson Dawn',
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of Harbinger of the Crimson Dawn.',
           chapter_rating: 4,
@@ -245,10 +245,10 @@ const main = async () =>{
           book_id: '9934ff55-1c44-44e1-875f-f7762d774fd4',
         },
       });
-    
+      
       const chapter5 = await prisma.chapter.create({
         data: {
-        
+          chapter_name: 'Echoes of the Crystal Cavern',
           chapter_sequence: 1,
           chapter_content: 'This is chapter 1 contents of Echoes of the Crystal Cavern.',
           chapter_rating: 4,
@@ -257,6 +257,7 @@ const main = async () =>{
           book_id: 'df2c39f0-d3bc-4d16-b803-c4a9a20a656d',
         },
       });
+      
 };
 main()
   .then(async () => {
