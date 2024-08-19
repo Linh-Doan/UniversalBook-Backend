@@ -1,28 +1,30 @@
 const prisma = require('../lib/prisma');
 
-exports.getAllAuthorGroups = async (req, res) => {
-    try {
-        const authorGroups = await prisma.author_group.findMany({
-            include: {
-                account_author_group_member: {
-                    select: {
-                        account: true
+exports.getAllAuthorGroups = async (req, res, next) => {
+    if (Object.keys(req.query).length === 0) {
+        try {
+            const authorGroups = await prisma.author_group.findMany({
+                include: {
+                    account_author_group_member: {
+                        select: {
+                            account: true
+                        }
                     }
                 }
-            }
-        });
-        res.status(200).json({
-        status: 'success',
-        results: authorGroups.length,
-        data: {authorGroups}
-        })
-    } catch(err) {
-        res.status(404).json({
-            statue: "fail",
-            message: err
-        })
+            });
+            res.status(200).json({
+            status: 'success',
+            results: authorGroups.length,
+            data: {authorGroups}
+            })
+        } catch(err) {
+            res.status(404).json({
+                statue: "fail",
+                message: err
+            })
+        }
     }
-    
+    next()
 }
 
 exports.createAuthorGroup = async (req, res) => {
@@ -64,6 +66,38 @@ exports.getAuthorGroup = async(req, res) => {
             data: {authorGroup}
         })
     } catch (err) {
+        res.status(404).json({
+            statue: "fail",
+            message: err
+        })
+    }
+}
+
+exports.getAuthorGroupsByAccountId = async (req, res) => {
+    try {
+        if (req.query.account_id ) {
+            const relationships = await prisma.account_author_group_member.findMany({
+                where: {
+                    account_id: req.query.account_id
+                },
+                include: {
+                    author_group: true
+                }
+            });
+            const authorGroups = relationships.map((relationship) => relationship.author_group)
+            res.status(200).json({
+                status: "success",
+                data: {authorGroups: authorGroups}
+            });
+        } else {
+            console.log('In 92')
+            res.status(400).json({
+                status: 'error',
+                message: 'Invalid data sent'
+            })
+        }
+    } catch(err) {
+        console.log('In 99')
         res.status(404).json({
             statue: "fail",
             message: err

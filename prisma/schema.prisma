@@ -73,7 +73,7 @@ model account_genre_follow {
 model author_group {
   author_group_id             String                        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   author_group_name           String?                       @db.VarChar(50)
-  author_group_rating         Int?
+  author_group_rating         Decimal?                      @db.Decimal(3, 2)
   author_group_image_url      String?                       @db.VarChar(100)
   account_author_group_follow account_author_group_follow[]
   account_author_group_member account_author_group_member[]
@@ -84,7 +84,6 @@ model book {
   book_id                  String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   book_name                String                @db.VarChar(50)
   author_group_id          String                @db.Uuid
-  genre_id                 String                @db.Uuid
   summary_text             String?               @db.VarChar(200)
   original_book_id         String?               @db.Uuid
   book_image_url           String?               @db.VarChar(100)
@@ -92,20 +91,21 @@ model book {
   is_published             Boolean               @default(false)
   is_flagged_inappropriate Boolean               @default(false)
   created_on               DateTime              @default(now()) @db.Timestamp(6)
-  rating                   Int?                  @default(0)
+  rating                   Decimal?              @default(0) @db.Decimal(3, 2)
   rating_count             Int?                  @default(0)
   account_book_follow      account_book_follow[]
   author_group             author_group          @relation(fields: [author_group_id], references: [author_group_id], onDelete: Cascade, onUpdate: NoAction)
-  genre                    genre                 @relation(fields: [genre_id], references: [genre_id], onDelete: Cascade, onUpdate: NoAction)
   book                     book?                 @relation("bookTobook", fields: [original_book_id], references: [book_id], onUpdate: NoAction, map: "book_original_book_fk")
   other_book               book[]                @relation("bookTobook")
   book_comment             book_comment[]
+  book_genre               book_genre[]
   chapter                  chapter[]
 }
 
 model book_comment {
-  book_comment_id   String  @id @db.Uuid
+  book_comment_id   String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   book_comment_text String  @db.VarChar(255)
+  book_rating       Int
   book_id           String  @db.Uuid
   account_id        String  @db.Uuid
   account           account @relation(fields: [account_id], references: [account_id], onDelete: Cascade, onUpdate: NoAction)
@@ -116,7 +116,7 @@ model chapter {
   chapter_id             String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   chapter_sequence       Int
   chapter_content        String
-  chapter_rating         Int?
+  chapter_rating         Decimal?                 @db.Decimal(3, 2)
   chapter_image_url      String?                  @db.VarChar(100)
   created_on             DateTime                 @db.Timestamp(6)
   book_id                String                   @db.Uuid
@@ -139,9 +139,9 @@ model genre {
   genre_name           String                 @db.VarChar(50)
   genre_image_url      String?                @db.VarChar(100)
   created_on           DateTime               @default(now()) @db.Timestamp(6)
-  genre_rating         Int?
+  genre_rating         Decimal?               @db.Decimal(3, 2)
   account_genre_follow account_genre_follow[]
-  book                 book[]
+  book_genre           book_genre[]
   genre_comment        genre_comment[]
 }
 
@@ -158,4 +158,13 @@ model user_role {
   user_role_id String    @id @db.Uuid
   name         String    @db.VarChar(6)
   account      account[]
+}
+
+model book_genre {
+  book_id  String @db.Uuid
+  genre_id String @db.Uuid
+  book     book   @relation(fields: [book_id], references: [book_id], onDelete: Cascade, onUpdate: NoAction)
+  genre    genre  @relation(fields: [genre_id], references: [genre_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([book_id, genre_id])
 }

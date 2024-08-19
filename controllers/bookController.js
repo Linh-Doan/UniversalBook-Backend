@@ -4,9 +4,9 @@ exports.getAllBooks = async (req, res) => {
     try {
         const books = await prisma.book.findMany();
         res.status(200).json({
-        status: 'success',
-        results: books.length,
-        data: {books}
+            status: 'success',
+            results: books.length,
+            data: {books}
         })
     } catch(err) {
         res.status(404).json({
@@ -65,9 +65,15 @@ exports.getLatestBooks = async (req, res) => {
 
 exports.createBook = async (req, res) => {
     try {
+        genres = req.body.genres;
+        delete req.body.genres;
+        let book = {...req.body, book_genre: {
+            create: genres.map(genre => {
+                return {genre_id: genre}
+            })
+        }};
         const newBook = await prisma.book.create({
-            data: req.body
-    
+            data: book
         })
         res.status(200).json({
             status: 'success',
@@ -85,11 +91,24 @@ exports.createBook = async (req, res) => {
 
 exports.getBook = async(req, res) => {
     try {
-        const book = await prisma.book.findUnique({
+        let book = await prisma.book.findUnique({
             where: {
                 book_id: req.params.id
+            },
+            include: {
+                author_group: true,
+                book_genre: {
+                    include: {
+                        genre: true
+                    }
+                }
             }
         })
+        if (book) {
+            const genres = book.book_genre.map(bookGenre => {return bookGenre.genre});
+            book.genres = genres;
+            delete book.book_genre;
+        }
         res.status(200).json({
             status: "success",
             data: {book}
