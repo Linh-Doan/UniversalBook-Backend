@@ -2,13 +2,93 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 const main = async () =>{
     const fiction = await prisma.genre.upsert({
-        where: { genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608' },
+      where: { genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608' },
+      update: {},
+      create: {
+          genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
+          genre_name: 'Fiction',
+          genre_image_url: '/img/genre_fiction.png',
+          genre_rating: 4
+      }
+  });
+
+    const fantasy = await prisma.genre.upsert({
+        where: { genre_id: '30b8e11f-c632-472a-b58a-5dd3c31ab018' },
         update: {},
         create: {
-            genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
-            genre_name: 'fiction'
+            genre_id: '30b8e11f-c632-472a-b58a-5dd3c31ab018',
+            genre_name: 'Fantasy',
+            genre_image_url: '/img/genre_fantasy.png',
+            genre_rating: 5
         }
-    })
+    });
+
+    const mystery = await prisma.genre.upsert({
+        where: { genre_id: 'c2b8e21f-9c1d-4422-aeca-f3d3b18f4583' },
+        update: {},
+        create: {
+            genre_id: 'c2b8e21f-9c1d-4422-aeca-f3d3b18f4583',
+            genre_name: 'Mystery',
+            genre_image_url: '/img/genre_mystery.png',
+            genre_rating: 3
+        }
+    });
+
+    const thriller = await prisma.genre.upsert({
+        where: { genre_id: 'ac1d213b-9d2b-473e-b1c2-a11f1e9b2423' },
+        update: {},
+        create: {
+            genre_id: 'ac1d213b-9d2b-473e-b1c2-a11f1e9b2423',
+            genre_name: 'Thriller',
+            genre_image_url: '/img/genre_thriller.png',
+            genre_rating: 4
+        }
+    });
+
+    const romance = await prisma.genre.upsert({
+        where: { genre_id: '51d3138e-1d3b-41c2-b2c1-9f8d7e9c2434' },
+        update: {},
+        create: {
+            genre_id: '51d3138e-1d3b-41c2-b2c1-9f8d7e9c2434',
+            genre_name: 'Romance',
+            genre_image_url: '/img/genre_romance.png',
+            genre_rating: 5
+        }
+    });
+
+    const sciFi = await prisma.genre.upsert({
+        where: { genre_id: '7a3e421f-9c9b-492a-a23b-c3d3b19f4612' },
+        update: {},
+        create: {
+            genre_id: '7a3e421f-9c9b-492a-a23b-c3d3b19f4612',
+            genre_name: 'Science Fiction',
+            genre_image_url: '/img/genre_scifi.png',
+            genre_rating: 5
+        }
+    });
+
+    const horror = await prisma.genre.upsert({
+        where: { genre_id: 'db4e921c-1c3e-43c2-b3c2-c5f8f9e9d234' },
+        update: {},
+        create: {
+            genre_id: 'db4e921c-1c3e-43c2-b3c2-c5f8f9e9d234',
+            genre_name: 'Horror',
+            genre_image_url: '/img/genre_horror.png',
+            genre_rating: 3
+        }
+    });
+
+    const historical = await prisma.genre.upsert({
+        where: { genre_id: 'e2b3e31b-9b2e-4b2c-a8d2-b5e3c91c2145' },
+        update: {},
+        create: {
+            genre_id: 'e2b3e31b-9b2e-4b2c-a8d2-b5e3c91c2145',
+            genre_name: 'Historical',
+            genre_image_url: '/img/genre_historical.png',
+            genre_rating: 4
+        }
+    });
+
     const author1 = await prisma.author_group.upsert({
         where: { author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836' },
         update: {},
