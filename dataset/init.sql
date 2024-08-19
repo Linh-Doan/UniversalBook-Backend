@@ -32,15 +32,17 @@ create table user_role (
 );
 
 create table account (
-	account_id UUID primary key,
-	email varchar(50) not null,
+	account_id UUID DEFAULT gen_random_uuid() primary key,
+    account_name varchar(50),
+	email varchar(50) unique not null,
 	account_password varchar(60) not null,
 	account_language varchar(3) not null,
 	user_role_id UUID not null references user_role(user_role_id)
 );
 
 create table author_group (
-	author_group_id UUID primary key,
+	author_group_id UUID DEFAULT gen_random_uuid() primary key,
+    author_group_name varchar(50),
 	author_group_rating integer,
 	author_group_image_url varchar(100)
 );
@@ -155,3 +157,5 @@ create table account_chapter_follow (
 		chapter_id
 	)
 );
+
+commit;
