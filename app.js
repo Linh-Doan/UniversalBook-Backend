@@ -4,6 +4,7 @@ const authorGroupRouter = require('./routes/authorGroupRoutes')
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
 const chapterRouter = require('./routes/chapterRoutes')
+const genreRouter = require('./routes/genreRoutes')
 const app = express();
 
 //MIDDLEWARES
@@ -15,7 +16,8 @@ app.use(express.static(`${__dirname}/public`));
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/books', bookRouter);
 app.use('/api/v1/authorgroup', authorGroupRouter);
-app.use('/api/v1/chapters', chapterRouter)
+app.use('/api/v1/chapters', chapterRouter);
+app.use('/api/v1/genres', genreRouter);
 app.get('/', (req, res) => {
     res.send("Hello world");
 })
