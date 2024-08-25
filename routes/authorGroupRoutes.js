@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
     .route('/')
-    .get(authorGroupController.getAllAuthorGroups)
+    .get(authorGroupController.getAllAuthorGroups, authorGroupController.getAuthorGroupsByAccountId)
     .post(authorGroupController.createAuthorGroup);
 
 router

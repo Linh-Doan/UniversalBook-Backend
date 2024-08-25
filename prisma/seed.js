@@ -278,7 +278,6 @@ const main = async () => {
             "Deep within a mystical cavern, crystalline echoes reveal forgotten histories and hidden dangers. A brave explorer uncovers a secret that could reshape her world's future."
         }
     });
-
     const chapter1 = await prisma.chapter.create({
         data: {
             chapter_sequence: 1,
@@ -331,6 +330,20 @@ const main = async () => {
             chapter_image_url: '/img/book5.jpeg',
             created_on: new Date('2024-08-05'),
             book_id: 'df2c39f0-d3bc-4d16-b803-c4a9a20a656d',
+        }
+    });
+
+    const accountBookFollow1 = await prisma.account_book_follow.upsert({
+        where: {
+            account_id_book_id: {
+                account_id: "3c23729a-820b-4cfe-9b29-70132bac0c74",
+                book_id: "fa3b26b3-1250-432c-8a17-f1593a256708"
+            }
+        },
+        update: {},
+        create: {
+            account_id: "3c23729a-820b-4cfe-9b29-70132bac0c74",
+            book_id: "fa3b26b3-1250-432c-8a17-f1593a256708" 
         }
     });
 };
