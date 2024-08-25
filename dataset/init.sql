@@ -56,11 +56,6 @@ create table account_author_group_member (
 	)
 );
 
--- These indexes can help optimize queries that filter or sort by these columns.
-CREATE INDEX idx_genre_created_on ON genre(created_on);
-CREATE INDEX idx_book_created_on ON book(created_on);
-CREATE INDEX idx_book_rating ON book(rating);
-
 create table genre (
 	genre_id UUID DEFAULT gen_random_uuid() primary key,
 	genre_name varchar(50) not null,
