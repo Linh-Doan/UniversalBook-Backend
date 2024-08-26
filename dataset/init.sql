@@ -22,6 +22,8 @@ DROP TABLE if exists chapter_comment CASCADE;
 
 DROP TABLE if exists genre CASCADE;
 
+DROP TABLE if exists book_genre CASCADE;
+
 DROP TABLE if exists genre_comment CASCADE;
 
 DROP TABLE if exists user_role CASCADE;
