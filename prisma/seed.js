@@ -22,19 +22,57 @@ const main = async () => {
         where: {genre_id: 'e2d6c5ae-921c-4e73-a3d4-d65af2372b54'},
         update: {},
         create: {
-            genre_id: 'e2d6c5ae-921c-4e73-a3d4-d65af2372b54',
-            genre_name: 'Science fiction'
+            genre_id: 'ac1d213b-9d2b-473e-b1c2-a11f1e9b2423',
+            genre_name: 'Thriller',
+            genre_image_url: '/img/genre_thriller.png',
+            genre_rating: 4
         }
     });
-    await prisma.genre.create({data:{genre_name: 'Non-Fiction'}});
-    await prisma.genre.create({data:{genre_name: 'Fantasy'}});
-    await prisma.genre.create({data:{genre_name: 'Romance'}});
-    await prisma.genre.create({data:{genre_name: 'Horror'}});
-    await prisma.genre.create({data:{genre_name: 'Thriller'}});
-    await prisma.genre.create({data:{genre_name: 'Biography'}});
-    await prisma.genre.create({data:{genre_name: 'History'}});
-    await prisma.genre.create({data:{genre_name: 'Self-Help'}});
-    await prisma.genre.create({data:{genre_name: 'Poetry'}});
+
+    const romance = await prisma.genre.upsert({
+        where: { genre_id: '51d3138e-1d3b-41c2-b2c1-9f8d7e9c2434' },
+        update: {},
+        create: {
+            genre_id: '51d3138e-1d3b-41c2-b2c1-9f8d7e9c2434',
+            genre_name: 'Romance',
+            genre_image_url: '/img/genre_romance.png',
+            genre_rating: 5
+        }
+    });
+
+    const sciFi = await prisma.genre.upsert({
+        where: { genre_id: '7a3e421f-9c9b-492a-a23b-c3d3b19f4612' },
+        update: {},
+        create: {
+            genre_id: '7a3e421f-9c9b-492a-a23b-c3d3b19f4612',
+            genre_name: 'Science Fiction',
+            genre_image_url: '/img/genre_scifi.png',
+            genre_rating: 5
+        }
+    });
+
+    const horror = await prisma.genre.upsert({
+        where: { genre_id: 'db4e921c-1c3e-43c2-b3c2-c5f8f9e9d234' },
+        update: {},
+        create: {
+            genre_id: 'db4e921c-1c3e-43c2-b3c2-c5f8f9e9d234',
+            genre_name: 'Horror',
+            genre_image_url: '/img/genre_horror.png',
+            genre_rating: 3
+        }
+    });
+
+    const historical = await prisma.genre.upsert({
+        where: { genre_id: 'e2b3e31b-9b2e-4b2c-a8d2-b5e3c91c2145' },
+        update: {},
+        create: {
+            genre_id: 'e2b3e31b-9b2e-4b2c-a8d2-b5e3c91c2145',
+            genre_name: 'Historical',
+            genre_image_url: '/img/genre_historical.png',
+            genre_rating: 4
+        }
+    });
+    
     const author1 = await prisma.author_group.upsert({
         where: {author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836'},
         update: {},
@@ -292,13 +330,13 @@ const main = async () => {
         where: {
             book_id_genre_id: {
                 book_id: "7f1de43d-91d5-4cb9-8e42-066673bdc238",
-                genre_id: "7c2e1c90-db30-4329-ba2e-5f5ce338d4e8"
+                genre_id: "30b8e11f-c632-472a-b58a-5dd3c31ab018"
             }
         },
         update: {},
         create: {
             book_id: "7f1de43d-91d5-4cb9-8e42-066673bdc238",
-            genre_id: "7c2e1c90-db30-4329-ba2e-5f5ce338d4e8" 
+            genre_id: "30b8e11f-c632-472a-b58a-5dd3c31ab018" 
         }
         
     });
@@ -319,99 +357,99 @@ const main = async () => {
         where: {
             book_id_genre_id: {
                 book_id: "0aa0b2ff-a025-47f0-ac47-12864b1d4c35",
-                genre_id: "e2d6c5ae-921c-4e73-a3d4-d65af2372b54"
+                genre_id: "30b8e11f-c632-472a-b58a-5dd3c31ab018"
             }
         },
         update: {},
         create: {
             book_id: "0aa0b2ff-a025-47f0-ac47-12864b1d4c35",
-            genre_id: "e2d6c5ae-921c-4e73-a3d4-d65af2372b54"
+            genre_id: "30b8e11f-c632-472a-b58a-5dd3c31ab018"
         }
     });
     const bookgenre5 =  await prisma.book_genre.upsert({
         where: {
             book_id_genre_id: {
                 book_id: "fa3b26b3-1250-432c-8a17-f1593a256708",
-                genre_id: "e2d6c5ae-921c-4e73-a3d4-d65af2372b54"
+                genre_id: "30b8e11f-c632-472a-b58a-5dd3c31ab018"
             }
         },
         update: {},
         create: {
             book_id: "fa3b26b3-1250-432c-8a17-f1593a256708",
-            genre_id: "e2d6c5ae-921c-4e73-a3d4-d65af2372b54"
+            genre_id: "30b8e11f-c632-472a-b58a-5dd3c31ab018"
         }
     });
     const bookgenre6 =  await prisma.book_genre.upsert({
         where: {
             book_id_genre_id: {
                 book_id: "fa3b26b3-1250-432c-8a17-f1593a256708",
-                genre_id: "7c2e1c90-db30-4329-ba2e-5f5ce338d4e8"
+                genre_id: "30b8e11f-c632-472a-b58a-5dd3c31ab018"
             }
         },
         update: {},
         create: {
             book_id: "fa3b26b3-1250-432c-8a17-f1593a256708",
-            genre_id: "7c2e1c90-db30-4329-ba2e-5f5ce338d4e8"
+            genre_id: "30b8e11f-c632-472a-b58a-5dd3c31ab018"
         }
     });
     const chapter1 = await prisma.chapter.create({
-      data: {
-        chapter_name: 'The Luminous Veil',
-        chapter_sequence: 1,
-        chapter_content: 'In the ancient land of Elowen, where the mountains kissed the sky and rivers sang to the stars, there was a place few dared to speak of—a place known only as the Luminous Veil. Legends told of a shimmering barrier deep within the Enchanted Woods, a veil of light that danced with the colors of the dawn. It was said to separate the world of men from a realm forgotten by time, a world where dreams and nightmares walked hand in hand, and where the past and future intertwined like the threads of a tapestry. The villagers of Elowen whispered tales of the Veils origins. Some believed it was woven by the spirits of the ancient ones, who sought to protect their world from the greed and violence of humanity. Others claimed it was the last remnant of the old gods, a boundary that kept their secrets hidden from mortal eyes. But no one knew the truth, for no one who entered the Luminous Veil had ever returned—until now. It was on a quiet autumn evening that Elara, a young woman with a curious mind and a restless heart, found herself standing at the edge of the Enchanted Woods. Her grandmother had often told her stories of the Veil, warning her to stay away, but Elara could not resist its call. She had always felt a pull toward the unknown, a yearning for something beyond the mundane life of the village. As the sun dipped below the horizon, casting the woods in a golden glow, Elara took a deep breath and stepped into the forest. The trees seemed to whisper her name as she walked, their leaves rustling like secrets on the wind. The deeper she ventured, the more the light around her began to change, growing softer and more vibrant, until it seemed as though she were walking through a dream.',
-        chapter_rating: 4,
-        chapter_image_url: '/img/book1.jpeg',
-        created_on: new Date('2024-08-05'),
-        book_id: '7f1de43d-91d5-4cb9-8e42-066673bdc238',
-      },
+        data: {
+            
+            chapter_sequence: 1,
+            chapter_content: 'This is chapter 1 contents of Luminous Veil.',
+            chapter_rating: 4,
+            chapter_image_url: '/img/book1.jpeg',
+            created_on: new Date('2024-08-05'),
+            book_id: '7f1de43d-91d5-4cb9-8e42-066673bdc238',
+        },
     });
 
     const chapter2 = await prisma.chapter.create({
-      data: {
-        chapter_name: 'Songs of the Starbound',
-        chapter_sequence: 1,
-        chapter_content: 'This is chapter 1 contents of Songs of the Starbound.',
-        chapter_rating: 3,
-        chapter_image_url: '/img/book2.jpeg',
-        created_on: new Date('2024-08-05'),
-        book_id: '0aa0b2ff-a025-47f0-ac47-12864b1d4c35',
-      },
+        data: {
+        
+            chapter_sequence: 1,
+            chapter_content: 'This is chapter 1 contents of Songs of the Starbound.',
+            chapter_rating: 3,
+            chapter_image_url: '/img/book2.jpeg',
+            created_on: new Date('2024-08-05'),
+            book_id: '0aa0b2ff-a025-47f0-ac47-12864b1d4c35',
+        },
     });
 
     const chapter3 = await prisma.chapter.create({
-      data: {
-        chapter_name: 'The Midnight Tapestry',
+    data: {
+    
         chapter_sequence: 1,
         chapter_content: 'This is chapter 1 contents of The Midnight Tapestry.',
         chapter_rating: 5,
         chapter_image_url: '/img/book3.jpeg',
         created_on: new Date('2024-08-05'),
         book_id: 'fa3b26b3-1250-432c-8a17-f1593a256708',
-      },
+    },
     });
 
     const chapter4 = await prisma.chapter.create({
-      data: {
-        chapter_name: 'Harbinger of the Crimson Dawn',
+    data: {
+    
         chapter_sequence: 1,
         chapter_content: 'This is chapter 1 contents of Harbinger of the Crimson Dawn.',
         chapter_rating: 4,
         chapter_image_url: '/img/book4.jpeg',
         created_on: new Date('2024-08-05'),
         book_id: '9934ff55-1c44-44e1-875f-f7762d774fd4',
-      },
+    },
     });
 
     const chapter5 = await prisma.chapter.create({
-      data: {
-        chapter_name: 'Echoes of the Crystal Cavern',
+    data: {
+    
         chapter_sequence: 1,
         chapter_content: 'This is chapter 1 contents of Echoes of the Crystal Cavern.',
         chapter_rating: 4,
         chapter_image_url: '/img/book5.jpeg',
         created_on: new Date('2024-08-05'),
         book_id: 'df2c39f0-d3bc-4d16-b803-c4a9a20a656d',
-      },
+    },
     });
     const accountBookFollow1 = await prisma.account_book_follow.upsert({
         where: {
