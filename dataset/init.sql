@@ -128,6 +128,7 @@ create table account_author_group_follow (
 create table account_genre_follow (
 	account_id UUID references account(account_id) on delete cascade,
 	genre_id UUID references genre(genre_id) on delete cascade,
+	last_followed_on timestamp DEFAULT CURRENT_TIMESTAMP not null, -- New field to track when a genre was last followed
 	primary key(
 		account_id,
 		genre_id
