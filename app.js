@@ -3,6 +3,7 @@ const cors = require('cors');
 const authorGroupRouter = require('./routes/authorGroupRoutes');
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
+const genreRouter = require('./routes/genreRoutes')
 const chapterRouter = require('./routes/chapterRoutes');
 const accountBookFollowRouter = require('./routes/accountBookFollowRoutes');
 const bookCommentRouter = require('./routes/bookCommentRoutes');

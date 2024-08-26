@@ -61,10 +61,11 @@ model account_chapter_follow {
 }
 
 model account_genre_follow {
-  account_id String  @db.Uuid
-  genre_id   String  @db.Uuid
-  account    account @relation(fields: [account_id], references: [account_id], onDelete: Cascade, onUpdate: NoAction)
-  genre      genre   @relation(fields: [genre_id], references: [genre_id], onDelete: Cascade, onUpdate: NoAction)
+  account_id       String   @db.Uuid
+  genre_id         String   @db.Uuid
+  last_followed_on DateTime @default(now()) @db.Timestamp(6)
+  account          account  @relation(fields: [account_id], references: [account_id], onDelete: Cascade, onUpdate: NoAction)
+  genre            genre    @relation(fields: [genre_id], references: [genre_id], onDelete: Cascade, onUpdate: NoAction)
 
   @@id([account_id, genre_id])
 }
