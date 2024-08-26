@@ -7,7 +7,6 @@ const genreRouter = require('./routes/genreRoutes')
 const chapterRouter = require('./routes/chapterRoutes');
 const accountBookFollowRouter = require('./routes/accountBookFollowRoutes');
 const bookCommentRouter = require('./routes/bookCommentRoutes');
-const genreRouter = require('./routes/genreRoutes');
 const app = express();
 
 //MIDDLEWARES
