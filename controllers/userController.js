@@ -26,15 +26,24 @@ async function getUserByEmail(req, res) {
     }
 }
 
-exports.getUsers = (req, res) =>{
+exports.getUsers = async (req, res) => {
     if (req.query.email != null) {
         return getUserByEmail(req, res);
     } else {
-        res.status(500).json({
-            status: 'error',
-            message: 'this route is not yet defined'
+        try {
+            const users = await prisma.account.findMany();
+            res.status(200).json({
+                status: 'success',
+                results: users.length,
+                data: {users}
+            })
+        } catch (err) {
+            res.status(404).json({
+                statue: "fail",
+                message: err
             })
         }
+    }
 }
 
 

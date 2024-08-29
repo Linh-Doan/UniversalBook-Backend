@@ -30,14 +30,29 @@ create table user_role (
 	user_role_id UUID primary key,
 	name varchar(6) not null
 );
+insert into user_role Values ('2e6f32c1-43b0-49df-8181-52ad541cd23f', 'Admin');
+insert into user_role Values ('f45e6a3a-1726-4527-8c4c-f4913f291e37', 'User');
+
+create table language (
+	language_id  integer not null primary key,
+	language_name varchar(100) not null
+);
+
+insert into language Values (1,'English');
+insert into language Values (2,'Chinese');
+insert into language Values (3,'Hindi');
+insert into language Values (4,'Spanish');
+insert into language Values (5,'French');
+insert into language Values (6,'Arabic');
 
 create table account (
 	account_id UUID DEFAULT gen_random_uuid() primary key,
     account_name varchar(50),
 	email varchar(50) unique not null,
 	account_password varchar(60) not null,
-	account_language varchar(3) not null,
-	user_role_id UUID not null references user_role(user_role_id)
+	account_language integer DEFAULT 1 not null references language(language_id),
+	password_changed_at timestamp,
+	user_role_id UUID DEFAULT 'f45e6a3a-1726-4527-8c4c-f4913f291e37' not null references user_role(user_role_id)
 );
 
 create table author_group (
@@ -161,5 +176,7 @@ create table account_chapter_follow (
 		chapter_id
 	)
 );
+
+
 
 commit;

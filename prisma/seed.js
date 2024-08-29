@@ -1,6 +1,5 @@
-const {PrismaClient} = require('@prisma/client');
-require('../lib/prisma');
-const prisma = new PrismaClient();
+const prisma = require('../lib/prisma');
+
 const main = async () => {
     const fiction = await prisma.genre.upsert({
         where: { genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608' },
@@ -108,15 +107,6 @@ const main = async () => {
         }
     });
 
-    const adminRole = await prisma.user_role.upsert({
-        where: {user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f"},
-        update: {},
-        create: {
-            user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f",
-            name: "admin"
-        }
-    });
-
     const account1 = await prisma.account.upsert({
         where: {account_id: "3c23729a-820b-4cfe-9b29-70132bac0c74"},
         update: {},
@@ -125,8 +115,6 @@ const main = async () => {
             email: "test1@gmail.com",
             account_name: "test account 1",
             account_password: "12345",
-            account_language: "ENG",
-            user_role_id: adminRole.user_role_id,
             account_author_group_member: {create: [{author_group_id: author1.author_group_id}, {author_group_id:author2.author_group_id}]}
         }
     });
@@ -140,8 +128,6 @@ const main = async () => {
             email: "test2@gmail.com",
             account_name: "test account 2",
             account_password: "12345",
-            account_language: "ENG",
-            user_role_id: adminRole.user_role_id,
             account_author_group_member: {create: [{author_group_id: author1.author_group_id}]}
         }
     });
