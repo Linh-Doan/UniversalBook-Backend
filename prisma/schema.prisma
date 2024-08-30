@@ -118,6 +118,7 @@ model book_comment {
 
 model chapter {
   chapter_id             String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  chapter_name           String                   @db.VarChar(255)
   chapter_sequence       Int
   chapter_content        String
   chapter_rating         Decimal?                 @db.Decimal(3, 2)

@@ -4,57 +4,103 @@ exports.getAllChapters = async (req, res) => {
     try {
         const chapters = await prisma.chapter.findMany();
         res.status(200).json({
-        status: 'success',
-        results: chapters.length,
-        data: {chapters}
-        })
-    } catch(err) {
+            status: 'success',
+            results: chapters.length,
+            data: { chapters }
+        });
+    } catch (err) {
         res.status(404).json({
-            statue: "fail",
+            status: "fail",
             message: err
-        })
+        });
     }
-    
-}
+};
+
+exports.getTopRatedChapters = async (req, res) => {
+    try {
+        const chapters = await prisma.chapter.findMany({
+            orderBy: [
+                {
+                    chapter_rating: 'desc'
+                }
+            ]
+        });
+        res.status(200).json({
+            status: 'success',
+            results: chapters.length,
+            data: { chapters }
+        });
+    } catch (err) {
+        console.log(err)
+        res.status(404).json({
+            status: "fail",
+            message: err
+        });
+    }
+};
+
+exports.getLatestChapters = async (req, res) => {
+    try {
+        const chapters = await prisma.chapter.findMany({
+            orderBy: [
+                {
+                    created_on: 'desc'
+                }
+            ]
+        });
+        res.status(200).json({
+            status: 'success',
+            results: chapters.length,
+            data: { chapters }
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: "fail",
+            message: err
+        });
+    }
+};
 
 exports.createChapter = async (req, res) => {
     try {
-        const newChapter = await prisma.chapter.create({
+        const chapter = await prisma.chapter.create({
             data: req.body
-    
-        })
-        res.status(200).json({
+        });
+        res.status(201).json({
             status: 'success',
             data: {
-                chapter: newChapter
+                chapter
             }
-        })
+        });
     } catch (err) {
         res.status(400).json({
             status: 'fail',
             message: 'Invalid data sent'
-        })
+        });
     }
-}
+};
 
-exports.getChapter = async(req, res) => {
+exports.getChapter = async (req, res) => {
     try {
         const chapter = await prisma.chapter.findUnique({
             where: {
                 chapter_id: req.params.id
+            },
+            include: {
+                book: true
             }
-        })
+        });
         res.status(200).json({
             status: "success",
-            data: {chapter}
-        })
+            data: { chapter }
+        });
     } catch (err) {
         res.status(404).json({
-            statue: "fail",
+            status: "fail",
             message: err
-        })
+        });
     }
-}
+};
 
 exports.updateChapter = async (req, res) => {
     try {
@@ -63,19 +109,18 @@ exports.updateChapter = async (req, res) => {
                 chapter_id: req.params.id
             },
             data: req.body
-        })
+        });
         res.status(200).json({
             status: "success",
-            data: {updatedChapter}
-        })
+            data: { updatedChapter }
+        });
     } catch (err) {
-        console.log(err)
         res.status(404).json({
-            statue: "fail",
+            status: "fail",
             message: err
-        })
+        });
     }
-}
+};
 
 exports.deleteChapter = async (req, res) => {
     try {
@@ -83,15 +128,15 @@ exports.deleteChapter = async (req, res) => {
             where: {
                 chapter_id: req.params.id
             }
-        })
+        });
         res.status(204).json({
             status: 'success',
             data: null
-        })
+        });
     } catch (err) {
         res.status(404).json({
-            statue: "fail",
+            status: "fail",
             message: err
-        })
+        });
     }
-}
+};
