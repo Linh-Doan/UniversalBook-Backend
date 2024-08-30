@@ -13,7 +13,7 @@ const bookCommentRouter = require('./routes/bookCommentRoutes');
 const app = express();
 
 // GLOBAL MIDDLEWARES
-app.use(helmet()); //Ensure HTTP headers are set
+app.use(helmet({crossOriginResourcePolicy: false})); //Ensure HTTP headers are set
 const limiter = rateLimit({
     max: 100,
     window: 60 * 60 * 1000,
