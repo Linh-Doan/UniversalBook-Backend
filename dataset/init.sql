@@ -22,6 +22,8 @@ DROP TABLE if exists chapter_comment CASCADE;
 
 DROP TABLE if exists genre CASCADE;
 
+DROP TABLE if exists book_genre CASCADE;
+
 DROP TABLE if exists genre_comment CASCADE;
 
 DROP TABLE if exists user_role CASCADE;
@@ -92,6 +94,7 @@ alter table book add constraint book_original_book_fk foreign key(original_book_
 
 create table chapter ( 
 	chapter_id UUID DEFAULT gen_random_uuid() primary key,
+	chapter_name VARCHAR(255) NOT NULL,
 	chapter_sequence integer not null,
 	chapter_content text not null,
 	chapter_rating numeric(3,2),
