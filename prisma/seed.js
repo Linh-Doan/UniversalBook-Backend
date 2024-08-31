@@ -14,7 +14,8 @@ const main = async () => {
         where: {author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836'},
         update: {},
         create: {
-            author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836'
+            author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+            author_group_name: 'The Original Author Group'
         }
     });
 

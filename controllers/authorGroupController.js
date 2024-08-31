@@ -53,7 +53,8 @@ exports.getAuthorGroup = async(req, res) => {
                     select: {
                         account: true
                     }
-                }
+                },
+                book: true
             },
             where: {
                 author_group_id: req.params.id
