@@ -22,6 +22,8 @@ DROP TABLE if exists chapter_comment CASCADE;
 
 DROP TABLE if exists genre CASCADE;
 
+DROP TABLE if exists book_genre CASCADE;
+
 DROP TABLE if exists genre_comment CASCADE;
 
 DROP TABLE if exists user_role CASCADE;
@@ -43,7 +45,7 @@ create table account (
 create table author_group (
 	author_group_id UUID DEFAULT gen_random_uuid() primary key,
     author_group_name varchar(50),
-	author_group_rating integer,
+	author_group_rating numeric(3,2),
 	author_group_image_url varchar(100)
 );
 
@@ -61,14 +63,13 @@ create table genre (
 	genre_name varchar(50) not null,
 	genre_image_url varchar(100),
 	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null,
-	genre_rating integer
+	genre_rating numeric(3,2)
 );
 
 create table book (
 	book_id UUID DEFAULT gen_random_uuid() primary key,
 	book_name varchar(50) not null,
 	author_group_id UUID not null references author_group(author_group_id) on delete cascade,
-	genre_id UUID not null references genre(genre_id) on delete cascade,
 	summary_text varchar(200),
 	original_book_id UUID,
 	book_image_url varchar(100),
@@ -76,17 +77,27 @@ create table book (
 	is_published boolean DEFAULT FALSE not null,
 	is_flagged_inappropriate boolean DEFAULT FALSE not null,
 	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null,
-	rating integer DEFAULT 0,
+	rating numeric(3,2) DEFAULT 0,
 	rating_count integer DEFAULT 0
+);
+
+create table book_genre (
+	book_id UUID not null references book(book_id) on delete cascade,
+	genre_id UUID not null references genre(genre_id) on delete cascade,
+	primary key(
+		book_id,
+		genre_id
+	)
 );
 
 alter table book add constraint book_original_book_fk foreign key(original_book_id) references book(book_id) on delete set null;
 
 create table chapter ( 
 	chapter_id UUID DEFAULT gen_random_uuid() primary key,
+	chapter_name VARCHAR(255) NOT NULL,
 	chapter_sequence integer not null,
 	chapter_content text not null,
-	chapter_rating integer,
+	chapter_rating numeric(3,2),
 	chapter_image_url varchar(100),
 	created_on timestamp not null,
 	book_id UUID not null references book(book_id) on delete cascade
@@ -108,8 +119,9 @@ create table chapter_comment (
 );
 
 create table book_comment (
-	book_comment_id UUID primary key,
+	book_comment_id UUID DEFAULT gen_random_uuid() primary key,
 	book_comment_text varchar(255) not null,
+	book_rating integer not null,
 	book_id UUID not null references book(book_id) on delete cascade,
 	account_id UUID not null references account(account_id) on delete cascade
 );
@@ -128,6 +140,7 @@ create table account_author_group_follow (
 create table account_genre_follow (
 	account_id UUID references account(account_id) on delete cascade,
 	genre_id UUID references genre(genre_id) on delete cascade,
+	last_followed_on timestamp DEFAULT CURRENT_TIMESTAMP not null, -- New field to track when a genre was last followed
 	primary key(
 		account_id,
 		genre_id
