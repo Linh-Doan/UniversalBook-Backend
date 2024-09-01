@@ -1,6 +1,7 @@
 const prisma = require('../lib/prisma');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { PrismaClientKnownRequestError } = require('@prisma/client/runtime/library');
 
 exports.signUp = async (req, res) => {
     try {
@@ -14,11 +15,18 @@ exports.signUp = async (req, res) => {
         });
         createAndSendToken(newUser, 201, res)
     } catch (err) {
-        console.log(err)
-        res.status(400).json({
-            status: 'fail',
-            message: 'Invalid data sent'
-        })
+        if (err instanceof PrismaClientKnownRequestError) {
+            res.status(400).json({
+                status: 'fail',
+                message: 'Email already exists'
+            })
+        } else {
+            res.status(400).json({
+                status: 'fail',
+                message: 'Invalid data sent'
+            })
+        }
+        
     }
 };
 
@@ -55,21 +63,11 @@ exports.login = async (req, res) => {
 const correctPassword = async (candidatePassword, userPassword) => {
     return await bcrypt.compare(candidatePassword, userPassword)
 }
-const signToken = id => {
-    return jwt.sign({id: id}, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN
-    });
-}
 
 // Validate JWT from requests to validate before allowing users to access web resources
 exports.protect = async (req, res, next) => {
-    let token;
+    let token = req.cookies['jwt'];
     // Check if token exists
-    if (req.headers.authorization && 
-        req.headers.authorization.startsWith('Bear')) {
-        token = req.headers.authorization.split(' ')[1];
-        // console.log(token)
-    }
     if (!token) {
         return res.status(401).json({
             status: 'fail',
@@ -116,18 +114,38 @@ const passwordChangedAfterJWT = (changedTime, JWTTime) => {
 }
 
 const createAndSendToken = (user, statusCode, res) => {
-    const token = signToken(user.account_id);
+    const token = jwt.sign({id: user.account_id}, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN
+    });
     const cookieOptions = {
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-        httpOnly: true // Cannot be accessed or modified by browsers
+        httpOnly: true, // Cannot be accessed or modified by javascript
+        path: '/',
+        sameSite: process.env.NODE_ENV === 'development' ? 'strict' : 'None',
+        secure: process.env.NODE_ENV !== 'development'
     };
-    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true; // HTTPS
-    res.cookie('jwt', token, cookieOptions)
-    res.status(statusCode).json({
-        status: 'success',
-        token,
-        data: {
-            user
-        }
-    })
+    res
+        .cookie('jwt', token, cookieOptions)
+        .status(statusCode)
+        .json({
+            status: 'success',
+            token,
+            data: {
+                user
+            }
+    }); 
+}
+exports.logout = async (req, res) => {
+    const cookieOptions = {
+        httpOnly: true, // Cannot be accessed or modified by browsers
+        path: '/',
+        maxAge: -1,
+        sameSite: process.env.NODE_ENV === 'development' ? 'strict' : 'None',
+        secure: process.env.NODE_ENV !== 'development'
+    };
+    // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true; // HTTPS
+    res
+        .cookie('jwt', null, cookieOptions)
+        .status(204)
+        .send(); 
 }

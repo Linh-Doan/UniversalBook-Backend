@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 
 const authorGroupRouter = require('./routes/authorGroupRoutes');
@@ -12,7 +13,7 @@ const accountBookFollowRouter = require('./routes/accountBookFollowRoutes');
 const bookCommentRouter = require('./routes/bookCommentRoutes');
 const app = express();
 
-// GLOBAL MIDDLEWARES
+//MIDDLEWARES
 app.use(helmet({crossOriginResourcePolicy: false})); //Ensure HTTP headers are set
 const limiter = rateLimit({
     max: 100,
@@ -20,10 +21,11 @@ const limiter = rateLimit({
     message: 'Too many requests from this IP, try again later'
 });
 app.use('/api',limiter); //Rate limiter
-//MIDDLEWARES
 app.use(express.json({ limit: '10kb'})); // Parse request data into req.body
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cookieParser());
 app.use(express.static(`${__dirname}/public`));
+
 
 //ROUTES
 app.use('/api/v1/users', userRouter);
