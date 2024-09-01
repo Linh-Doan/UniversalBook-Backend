@@ -108,16 +108,47 @@ exports.getAuthorGroupsByAccountId = async (req, res) => {
 
 exports.updateAuthorGroup = async (req, res) => {
     try {
-        const updatedAuthorGroup = await prisma.author_group.update({
-            where: {
-                author_group_id: req.params.id
-            },
-            data: req.body
-        })
-        res.status(200).json({
-            status: "success",
-            data: {updatedAuthorGroup}
-        })
+
+        if (!("delete" in req.body.account_author_group_member)) {
+            const updatedAuthorGroup = await prisma.author_group.update({
+                where: {
+                    author_group_id: req.params.id
+                },
+                data: req.body
+            })
+            res.status(200).json({
+                status: "success",
+                data: {updatedAuthorGroup}
+            })
+        } else {
+            await prisma.account_author_group_member.delete({
+                where: {
+                    account_id_author_group_id: {
+                        author_group_id: req.params.id,
+                        account_id: req.body.account_author_group_member.delete.account.account_id
+                    }
+                }
+            })
+            const authorGroup = await prisma.author_group.findUnique({
+                include: {
+                    account_author_group_member: {
+                        select: {
+                            account: true
+                        }
+                    },
+                    book: true
+                },
+                where: {
+                    author_group_id: req.params.id
+                }
+            })
+
+            res.status(200).json({
+                status: "success",
+                data: {authorGroup}
+            })
+        }
+        
     } catch (err) {
         console.log(err)
         res.status(404).json({
