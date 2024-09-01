@@ -13,10 +13,10 @@ model account {
   account_name                String?                       @db.VarChar(50)
   email                       String                        @unique @db.VarChar(50)
   account_password            String                        @db.VarChar(60)
-  account_language            Int                           @default(1)
+  language_id                 Int                           @default(1)
   password_changed_at         DateTime?                     @db.Timestamp(6)
   user_role_id                String                        @default(dbgenerated("'f45e6a3a-1726-4527-8c4c-f4913f291e37'::uuid")) @db.Uuid
-  language                    language                      @relation(fields: [account_language], references: [language_id], onDelete: NoAction, onUpdate: NoAction)
+  language                    language                      @relation(fields: [language_id], references: [language_id], onDelete: NoAction, onUpdate: NoAction)
   user_role                   user_role                     @relation(fields: [user_role_id], references: [user_role_id], onDelete: NoAction, onUpdate: NoAction)
   account_author_group_follow account_author_group_follow[]
   account_author_group_member account_author_group_member[]

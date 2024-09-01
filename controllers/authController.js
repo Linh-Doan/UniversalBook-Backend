@@ -16,6 +16,7 @@ exports.signUp = async (req, res) => {
         createAndSendToken(newUser, 201, res)
     } catch (err) {
         if (err instanceof PrismaClientKnownRequestError) {
+            console.log(err)
             res.status(400).json({
                 status: 'fail',
                 message: 'Email already exists'

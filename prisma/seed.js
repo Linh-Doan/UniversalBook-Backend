@@ -88,6 +88,33 @@ const main = async () => {
             genre_rating: 4
         }
     });
+
+    const adminRole = await prisma.user_role.upsert({
+        where: {user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f"},
+        update: {},
+        create: {
+            user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f",
+            name: "admin"
+        }
+    });
+
+    const userRole = await prisma.user_role.upsert({
+        where: {user_role_id: "f45e6a3a-1726-4527-8c4c-f4913f291e37"},
+        update: {},
+        create: {
+            user_role_id: "f45e6a3a-1726-4527-8c4c-f4913f291e37",
+            name: "user"
+        }
+    });
+
+    const english = await prisma.language.upsert({
+        where: {language_id: 1},
+        update: {},
+        create: {
+            language_id: 1,
+            language_name: "English"
+        }
+    });
     
     const author1 = await prisma.author_group.upsert({
         where: {author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836'},
