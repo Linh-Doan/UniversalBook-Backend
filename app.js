@@ -11,6 +11,7 @@ const genreRouter = require('./routes/genreRoutes')
 const chapterRouter = require('./routes/chapterRoutes');
 const accountBookFollowRouter = require('./routes/accountBookFollowRoutes');
 const bookCommentRouter = require('./routes/bookCommentRoutes');
+
 const app = express();
 
 //MIDDLEWARES
@@ -22,7 +23,7 @@ const limiter = rateLimit({
 });
 app.use('/api',limiter); //Rate limiter
 app.use(express.json({ limit: '10kb'})); // Parse request data into req.body
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: process.env.FRONT_END_URL}));
 app.use(cookieParser());
 app.use(express.static(`${__dirname}/public`));
 
