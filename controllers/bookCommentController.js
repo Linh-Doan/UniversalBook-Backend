@@ -5,6 +5,13 @@ exports.getCommentsByBookId = async (req, res) => {
         const comments = await prisma.book_comment.findMany({
             where: {
                 book_id: req.query.book_id
+            },
+            include: {
+                account: {
+                    select: {
+                        account_name: true
+                    }
+                }
             }
         });
         res.status(200).json({
