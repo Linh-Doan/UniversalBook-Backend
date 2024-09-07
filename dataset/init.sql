@@ -28,9 +28,16 @@ DROP TABLE if exists genre_comment CASCADE;
 
 DROP TABLE if exists user_role CASCADE;
 
+DROP TABLE if exists language CASCADE;
+
 create table user_role (
 	user_role_id UUID primary key,
 	name varchar(6) not null
+);
+
+create table language (
+	language_id  integer not null primary key,
+	language_name varchar(100) not null
 );
 
 create table account (
@@ -38,8 +45,9 @@ create table account (
     account_name varchar(50),
 	email varchar(50) unique not null,
 	account_password varchar(60) not null,
-	account_language varchar(3) not null,
-	user_role_id UUID not null references user_role(user_role_id)
+	language_id integer DEFAULT 1 not null references language(language_id),
+	password_changed_at timestamp,
+	user_role_id UUID DEFAULT 'f45e6a3a-1726-4527-8c4c-f4913f291e37' not null references user_role(user_role_id)
 );
 
 create table author_group (
@@ -164,5 +172,7 @@ create table account_chapter_follow (
 		chapter_id
 	)
 );
+
+
 
 commit;
