@@ -10,7 +10,7 @@ router.get('/me', userController.getCurrentUser);
 
 router
     .route('/')
-    .get(authController.protect, userController.getUsers)
+    .get(userController.getUsers)
     .post(userController.createUser);
 
 router
