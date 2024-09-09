@@ -108,6 +108,16 @@ const main = async () => {
         }
     });
 
+    const author3 = await prisma.author_group.upsert({
+        where: {author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f45'},
+        update: {},
+        create: {
+            author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f45',
+            author_group_name: 'test account 1 author',
+            author_group_is_single: true
+        }
+    });
+
     const adminRole = await prisma.user_role.upsert({
         where: {user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f"},
         update: {},
@@ -127,7 +137,13 @@ const main = async () => {
             account_password: "12345",
             account_language: "ENG",
             user_role_id: adminRole.user_role_id,
-            account_author_group_member: {create: [{author_group_id: author1.author_group_id}, {author_group_id:author2.author_group_id}]}
+            account_author_group_member: {
+                create: [
+                    {author_group_id: author1.author_group_id}, 
+                    {author_group_id: author2.author_group_id},
+                    {author_group_id: author3.author_group_id}
+                ]
+            }
         }
     });
 
@@ -151,6 +167,31 @@ const main = async () => {
         data: {
             book_name: 'The Luminous Veil',
             author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+            // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
+            book_image_url: '/img/book1.jpeg',
+            rating: 4.3,
+            rating_count: 3,
+            summary_text: 'A young sorceress discovers a hidden dimension behind a veil of light, unlocking ancient secrets and untold power. Her journey unveils truths that could alter the fate of her world.'
+        }
+    });
+
+    const personalBook1 = await prisma.book.create({
+        data: {
+            book_name: 'My personal book 1',
+            author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f45',
+            // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
+            book_image_url: '/img/book1.jpeg',
+            rating: 4.3,
+            rating_count: 3,
+            summary_text: 'A young sorceress discovers a hidden dimension behind a veil of light, unlocking ancient secrets and untold power. Her journey unveils truths that could alter the fate of her world.',
+            is_published: true
+        }
+    });
+
+    const personalBook2 = await prisma.book.create({
+        data: {
+            book_name: 'My personal draft 1',
+            author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f45',
             // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book1.jpeg',
             rating: 4.3,
