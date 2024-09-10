@@ -1,5 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+
 const authorGroupRouter = require('./routes/authorGroupRoutes');
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -7,6 +11,7 @@ const genreRouter = require('./routes/genreRoutes');
 const chapterRouter = require('./routes/chapterRoutes');
 const accountBookFollowRouter = require('./routes/accountBookFollowRoutes');
 const bookCommentRouter = require('./routes/bookCommentRoutes');
+
 const searchRouter = require('./routes/searchRoutes');  // Import searchRoutes.js
 
 const app = express();

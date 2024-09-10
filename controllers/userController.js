@@ -1,4 +1,5 @@
 const prisma = require('../lib/prisma');
+const jwt = require('jsonwebtoken');
 
 async function getUserByEmail(req, res) {
     try {
@@ -26,15 +27,24 @@ async function getUserByEmail(req, res) {
     }
 }
 
-exports.getUsers = (req, res) =>{
+exports.getUsers = async (req, res) => {
     if (req.query.email != null) {
         return getUserByEmail(req, res);
     } else {
-        res.status(500).json({
-            status: 'error',
-            message: 'this route is not yet defined'
+        try {
+            const users = await prisma.account.findMany();
+            res.status(200).json({
+                status: 'success',
+                results: users.length,
+                data: {users}
+            })
+        } catch (err) {
+            res.status(404).json({
+                statue: "fail",
+                message: err
             })
         }
+    }
 }
 
 
@@ -67,6 +77,28 @@ exports.getUser = async(req, res) =>{
         res.status(404).json({
             statue: "fail",
             message: err
+        })
+    }
+}
+
+exports.getCurrentUser = async(req, res) =>{
+    try {
+        let token = req.cookies['jwt'];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);  
+        var userId = decoded.id;
+        const user = await prisma.account.findUnique({
+            where: {
+                account_id: userId
+            }
+        })
+        res.status(200).json({
+            status: "success",
+            data: {user}
+        })
+    } catch (err) {
+        res.status(404).json({
+            statue: "fail",
+            message: "No users found"
         })
     }
 }

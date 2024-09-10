@@ -1,6 +1,5 @@
-const {PrismaClient} = require('@prisma/client');
-require('../lib/prisma');
-const prisma = new PrismaClient();
+const prisma = require('../lib/prisma');
+
 const main = async () => {
     const fiction = await prisma.genre.upsert({
         where: { genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608' },
@@ -89,6 +88,33 @@ const main = async () => {
             genre_rating: 4
         }
     });
+
+    const adminRole = await prisma.user_role.upsert({
+        where: {user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f"},
+        update: {},
+        create: {
+            user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f",
+            name: "admin"
+        }
+    });
+
+    const userRole = await prisma.user_role.upsert({
+        where: {user_role_id: "f45e6a3a-1726-4527-8c4c-f4913f291e37"},
+        update: {},
+        create: {
+            user_role_id: "f45e6a3a-1726-4527-8c4c-f4913f291e37",
+            name: "user"
+        }
+    });
+
+    const english = await prisma.language.upsert({
+        where: {language_id: 1},
+        update: {},
+        create: {
+            language_id: 1,
+            language_name: "English"
+        }
+    });
     
     const author1 = await prisma.author_group.upsert({
         where: {author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836'},
@@ -108,6 +134,16 @@ const main = async () => {
         }
     });
 
+    const author3 = await prisma.author_group.upsert({
+        where: {author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f45'},
+        update: {},
+        create: {
+            author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f45',
+            author_group_name: 'test account 1 author',
+            author_group_is_single: true
+        }
+    });
+
     const adminRole = await prisma.user_role.upsert({
         where: {user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f"},
         update: {},
@@ -116,7 +152,6 @@ const main = async () => {
             name: "admin"
         }
     });
-
     const account1 = await prisma.account.upsert({
         where: {account_id: "3c23729a-820b-4cfe-9b29-70132bac0c74"},
         update: {},
@@ -127,7 +162,13 @@ const main = async () => {
             account_password: "12345",
             account_language: "ENG",
             user_role_id: adminRole.user_role_id,
-            account_author_group_member: {create: [{author_group_id: author1.author_group_id}, {author_group_id:author2.author_group_id}]}
+            account_author_group_member: {
+                create: [
+                    {author_group_id: author1.author_group_id}, 
+                    {author_group_id: author2.author_group_id},
+                    {author_group_id: author3.author_group_id}
+                ]
+            }
         }
     });
 
@@ -140,8 +181,6 @@ const main = async () => {
             email: "test2@gmail.com",
             account_name: "test account 2",
             account_password: "12345",
-            account_language: "ENG",
-            user_role_id: adminRole.user_role_id,
             account_author_group_member: {create: [{author_group_id: author1.author_group_id}]}
         }
     });
@@ -151,6 +190,31 @@ const main = async () => {
         data: {
             book_name: 'The Luminous Veil',
             author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+            // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
+            book_image_url: '/img/book1.jpeg',
+            rating: 4.3,
+            rating_count: 3,
+            summary_text: 'A young sorceress discovers a hidden dimension behind a veil of light, unlocking ancient secrets and untold power. Her journey unveils truths that could alter the fate of her world.'
+        }
+    });
+
+    const personalBook1 = await prisma.book.create({
+        data: {
+            book_name: 'My personal book 1',
+            author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f45',
+            // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
+            book_image_url: '/img/book1.jpeg',
+            rating: 4.3,
+            rating_count: 3,
+            summary_text: 'A young sorceress discovers a hidden dimension behind a veil of light, unlocking ancient secrets and untold power. Her journey unveils truths that could alter the fate of her world.',
+            is_published: true
+        }
+    });
+
+    const personalBook2 = await prisma.book.create({
+        data: {
+            book_name: 'My personal draft 1',
+            author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f45',
             // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book1.jpeg',
             rating: 4.3,
@@ -410,64 +474,65 @@ const main = async () => {
         }
     });
     const chapter1 = await prisma.chapter.create({
-        data: {
-            
-            chapter_sequence: 1,
-            chapter_content: 'This is chapter 1 contents of Luminous Veil.',
-            chapter_rating: 4,
-            chapter_image_url: '/img/book1.jpeg',
-            created_on: new Date('2024-08-05'),
-            book_id: '7f1de43d-91d5-4cb9-8e42-066673bdc238',
-        },
+      data: {
+        chapter_name: 'The Luminous Veil',
+        chapter_sequence: 1,
+        chapter_content: 'In the ancient land of Elowen, where the mountains kissed the sky and rivers sang to the stars, there was a place few dared to speak of—a place known only as the Luminous Veil. Legends told of a shimmering barrier deep within the Enchanted Woods, a veil of light that danced with the colors of the dawn. It was said to separate the world of men from a realm forgotten by time, a world where dreams and nightmares walked hand in hand, and where the past and future intertwined like the threads of a tapestry. The villagers of Elowen whispered tales of the Veils origins. Some believed it was woven by the spirits of the ancient ones, who sought to protect their world from the greed and violence of humanity. Others claimed it was the last remnant of the old gods, a boundary that kept their secrets hidden from mortal eyes. But no one knew the truth, for no one who entered the Luminous Veil had ever returned—until now. It was on a quiet autumn evening that Elara, a young woman with a curious mind and a restless heart, found herself standing at the edge of the Enchanted Woods. Her grandmother had often told her stories of the Veil, warning her to stay away, but Elara could not resist its call. She had always felt a pull toward the unknown, a yearning for something beyond the mundane life of the village. As the sun dipped below the horizon, casting the woods in a golden glow, Elara took a deep breath and stepped into the forest. The trees seemed to whisper her name as she walked, their leaves rustling like secrets on the wind. The deeper she ventured, the more the light around her began to change, growing softer and more vibrant, until it seemed as though she were walking through a dream.',
+        chapter_rating: 4,
+        chapter_image_url: '/img/book1.jpeg',
+        created_on: new Date('2024-08-05'),
+        book_id: '7f1de43d-91d5-4cb9-8e42-066673bdc238',
+      },
     });
-
-    const chapter2 = await prisma.chapter.create({
-        data: {
-        
-            chapter_sequence: 1,
-            chapter_content: 'This is chapter 1 contents of Songs of the Starbound.',
-            chapter_rating: 3,
-            chapter_image_url: '/img/book2.jpeg',
-            created_on: new Date('2024-08-05'),
-            book_id: '0aa0b2ff-a025-47f0-ac47-12864b1d4c35',
-        },
-    });
-
-    const chapter3 = await prisma.chapter.create({
-    data: {
     
+    const chapter2 = await prisma.chapter.create({
+      data: {
+        chapter_name: 'Songs of the Starbound',
+        chapter_sequence: 1,
+        chapter_content: 'This is chapter 1 contents of Songs of the Starbound.',
+        chapter_rating: 3,
+        chapter_image_url: '/img/book2.jpeg',
+        created_on: new Date('2024-08-05'),
+        book_id: '0aa0b2ff-a025-47f0-ac47-12864b1d4c35',
+      },
+    });
+    
+    const chapter3 = await prisma.chapter.create({
+      data: {
+        chapter_name: 'The Midnight Tapestry',
         chapter_sequence: 1,
         chapter_content: 'This is chapter 1 contents of The Midnight Tapestry.',
         chapter_rating: 5,
         chapter_image_url: '/img/book3.jpeg',
         created_on: new Date('2024-08-05'),
         book_id: 'fa3b26b3-1250-432c-8a17-f1593a256708',
-    },
+      },
     });
-
-    const chapter4 = await prisma.chapter.create({
-    data: {
     
+    const chapter4 = await prisma.chapter.create({
+      data: {
+        chapter_name: 'Harbinger of the Crimson Dawn',
         chapter_sequence: 1,
         chapter_content: 'This is chapter 1 contents of Harbinger of the Crimson Dawn.',
         chapter_rating: 4,
         chapter_image_url: '/img/book4.jpeg',
         created_on: new Date('2024-08-05'),
         book_id: '9934ff55-1c44-44e1-875f-f7762d774fd4',
-    },
+      },
     });
-
-    const chapter5 = await prisma.chapter.create({
-    data: {
     
+    const chapter5 = await prisma.chapter.create({
+      data: {
+        chapter_name: 'Echoes of the Crystal Cavern',
         chapter_sequence: 1,
         chapter_content: 'This is chapter 1 contents of Echoes of the Crystal Cavern.',
         chapter_rating: 4,
         chapter_image_url: '/img/book5.jpeg',
         created_on: new Date('2024-08-05'),
         book_id: 'df2c39f0-d3bc-4d16-b803-c4a9a20a656d',
-    },
+      },
     });
+    
     const accountBookFollow1 = await prisma.account_book_follow.upsert({
         where: {
             account_id_book_id: {
