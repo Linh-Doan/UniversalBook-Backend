@@ -1,8 +1,8 @@
 const request = require('supertest');
-const prisma = require('../lib/prisma');
-const app = require('../app');
+const prisma = require('../../lib/prisma');
+const app = require('../../app');
 
-jest.mock('../lib/prisma', () => ({
+jest.mock('../../lib/prisma', () => ({
     book: {
       findMany: jest.fn(),
     },
@@ -15,7 +15,7 @@ const mockResponse = () => {
     return res;
 };
 
-describe('Book Service', () => {
+describe('GET /books', () => {
     it('should return a list of books', async () => {
         const mockBooks = [{
             "book_id": "1",
@@ -34,14 +34,7 @@ describe('Book Service', () => {
         prisma.book.findMany.mockResolvedValue(mockBooks);
         const req = {};
         const res = mockResponse();
-  
-        // const books = await getAllBooks(req, res);
-        // expect(res.status).toHaveBeenCalledWith(200);
-        // expect(res.json).toHaveBeenCalledWith({
-        //     status: 'success',
-        //     results: mockBooks.length,
-        //     data: { books: mockBooks },
-        // });
+
         const response = await request(app).get('/api/v1/books');
         expect(response.statusCode).toBe(200);
         expect(response.text).toBe(JSON.stringify({
@@ -62,14 +55,6 @@ describe('Book Service', () => {
             status: 'fail',
             message: 'Database error',
         }))
-
-        // await getAllBooks(req, res);
-
-        // expect(res.status).toHaveBeenCalledWith(404);
-        // expect(res.json).toHaveBeenCalledWith({
-        //     status: 'fail',
-        //     message: 'Database error',
-        // });
     });
   
 
