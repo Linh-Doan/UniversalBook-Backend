@@ -7,10 +7,11 @@ const helmet = require('helmet');
 const authorGroupRouter = require('./routes/authorGroupRoutes');
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
-const genreRouter = require('./routes/genreRoutes')
+const genreRouter = require('./routes/genreRoutes');
 const chapterRouter = require('./routes/chapterRoutes');
 const accountBookFollowRouter = require('./routes/accountBookFollowRoutes');
 const bookCommentRouter = require('./routes/bookCommentRoutes');
+const searchRouter = require('./routes/searchRoutes');
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use('/api/v1/chapters', chapterRouter);
 app.use('/api/v1/follow/book', accountBookFollowRouter);
 app.use('/api/v1/comment/book', bookCommentRouter);
 app.use('/api/v1/genres', genreRouter);
+app.use('/api/v1/search', searchRouter);
 app.get('/', (req, res) => {
     res.send("Hello world");
 })
