@@ -79,7 +79,6 @@ model author_group {
   author_group_name           String?                       @db.VarChar(50)
   author_group_rating         Decimal?                      @db.Decimal(3, 2)
   author_group_image_url      String?                       @db.VarChar(100)
-  author_group_is_single      Boolean?                      @default(false)
   account_author_group_follow account_author_group_follow[]
   account_author_group_member account_author_group_member[]
   book                        book[]

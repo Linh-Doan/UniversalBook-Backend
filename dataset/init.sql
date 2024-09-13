@@ -54,8 +54,7 @@ create table author_group (
 	author_group_id UUID DEFAULT gen_random_uuid() primary key,
     author_group_name varchar(50),
 	author_group_rating numeric(3,2),
-	author_group_image_url varchar(100),
-    author_group_is_single boolean DEFAULT false
+	author_group_image_url varchar(100)
 );
 
 create table account_author_group_member (
