@@ -82,12 +82,9 @@ exports.createChapter = async (req, res) => {
 
 exports.getChapter = async (req, res) => {
     try {
-        const chapter = await prisma.chapter.findUnique({
+        const chapter = await prisma.chapter.findMany({
             where: {
-                chapter_id: req.params.id
-            },
-            include: {
-                book: true
+                book_id: req.params.id
             }
         });
         res.status(200).json({
