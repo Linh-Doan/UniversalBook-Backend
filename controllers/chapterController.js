@@ -99,6 +99,28 @@ exports.getChapter = async (req, res) => {
     }
 };
 
+exports.getChapterByChapterID = async (req, res) => {
+    try {
+        const chapter = await prisma.chapter.findUnique({
+            where: {
+                chapter_id: req.params.id
+            },
+            include: {
+                book: true
+            }
+        });
+        res.status(200).json({
+            status: "success",
+            data: { chapter }
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: "fail",
+            message: err
+        });
+    }
+};
+
 exports.updateChapter = async (req, res) => {
     try {
         const updatedChapter = await prisma.chapter.update({
