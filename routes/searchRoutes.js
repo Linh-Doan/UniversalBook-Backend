@@ -37,6 +37,15 @@ router.get('/', async (req, res) => {
                     }
                 }
             });
+        } else if (category === 'people') {
+            results = await prisma.author_group.findMany({
+                where: {
+                    author_group_name: {
+                        contains: q,
+                        mode: 'insensitive'
+                    }
+                }
+            });
         } else {
             return res.status(400).json({ message: 'Invalid category' });
         }
