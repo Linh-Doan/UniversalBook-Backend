@@ -144,14 +144,16 @@ const main = async () => {
         }
     });
 
-    const adminRole = await prisma.user_role.upsert({
-        where: {user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f"},
+    const author4 = await prisma.author_group.upsert({
+        where: {author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f46'},
         update: {},
         create: {
-            user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f",
-            name: "admin"
+            author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f46',
+            author_group_name: 'test account 1 author',
+            author_group_is_single: true
         }
     });
+
     const account1 = await prisma.account.upsert({
         where: {account_id: "3c23729a-820b-4cfe-9b29-70132bac0c74"},
         update: {},
@@ -160,7 +162,6 @@ const main = async () => {
             email: "test1@gmail.com",
             account_name: "test account 1",
             account_password: "12345",
-            account_language: "ENG",
             user_role_id: adminRole.user_role_id,
             account_author_group_member: {
                 create: [
@@ -181,7 +182,7 @@ const main = async () => {
             email: "test2@gmail.com",
             account_name: "test account 2",
             account_password: "12345",
-            account_author_group_member: {create: [{author_group_id: author1.author_group_id}]}
+            account_author_group_member: {create: [{author_group_id: author1.author_group_id}, {author_group_id: author4.author_group_id}]}
         }
     });
 
