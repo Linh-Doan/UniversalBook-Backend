@@ -85,9 +85,7 @@ create table book (
 	is_copiable boolean DEFAULT FALSE not null,
 	is_published boolean DEFAULT FALSE not null,
 	is_flagged_inappropriate boolean DEFAULT FALSE not null,
-	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null,
-	rating numeric(3,2) DEFAULT 0,
-	rating_count integer DEFAULT 0
+	created_on timestamp DEFAULT CURRENT_TIMESTAMP not null
 );
 
 create table book_genre (
