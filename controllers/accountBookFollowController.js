@@ -1,5 +1,5 @@
 const prisma = require('../lib/prisma');
-exports.getRelationship = async (req, res) => {
+exports.getRelationship = async (req, res, next) => {
     try {
         if (req.query.account_id && req.query.book_id) {
             const relationship = await prisma.account_book_follow.findFirst({
@@ -11,6 +11,32 @@ exports.getRelationship = async (req, res) => {
             res.status(200).json({
                 status: "success",
                 data: {relationship}
+            })
+        } else {
+            next();
+        }
+    } catch(err) {
+        res.status(404).json({
+            statue: "fail",
+            message: err
+        })
+    }
+}
+
+exports.getBooksAccountIsFollowing = async (req, res) => {
+    try {
+        if (req.query.account_id) {
+            const relationships = await prisma.account_book_follow.findMany({
+                where: {
+                    account_id: req.query.account_id
+                },
+                include: {
+                    book: true
+                }
+            });
+            res.status(200).json({
+                status: "success",
+                data: {relationships}
             })
         } else {
             res.status(500).json({

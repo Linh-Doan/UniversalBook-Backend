@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
     .route('/')
-    .get(accountBookFollowController.getRelationship)
+    .get(accountBookFollowController.getRelationship, accountBookFollowController.getBooksAccountIsFollowing)
     .post(accountBookFollowController.createRelationship)
     .delete(accountBookFollowController.deleteRelationship);
 

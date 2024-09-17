@@ -22,9 +22,6 @@ router.route('/:id')
     .patch(chapterController.updateChapter)
     .delete(chapterController.deleteChapter);
 
-router.route('/chapter/:id')
-    .get(chapterController.getChapterByChapterID);
-
 module.exports = router;
 
 

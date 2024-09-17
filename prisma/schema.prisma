@@ -96,8 +96,6 @@ model book {
   is_published             Boolean               @default(false)
   is_flagged_inappropriate Boolean               @default(false)
   created_on               DateTime              @default(now()) @db.Timestamp(6)
-  rating                   Decimal?              @default(0) @db.Decimal(3, 2)
-  rating_count             Int?                  @default(0)
   account_book_follow      account_book_follow[]
   author_group             author_group          @relation(fields: [author_group_id], references: [author_group_id], onDelete: Cascade, onUpdate: NoAction)
   book                     book?                 @relation("bookTobook", fields: [original_book_id], references: [book_id], onUpdate: NoAction, map: "book_original_book_fk")
