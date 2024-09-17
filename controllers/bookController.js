@@ -79,8 +79,12 @@ exports.createBook = async (req, res) => {
         let book = {...req.body, book_genre: {
             create: genres.map(genre => {
                 return {genre_id: genre}
-            })
+            }),
+            book_image_url: '/img/default-book.jpeg'
         }};
+        if (!('book_image_url' in book)) {
+            book = {...req.body, book_image_url: '/img/default-book.jpeg'}
+        }
         const newBook = await prisma.book.create({
             data: book
         })
