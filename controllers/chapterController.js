@@ -82,25 +82,6 @@ exports.createChapter = async (req, res) => {
 
 exports.getChapter = async (req, res) => {
     try {
-        const chapter = await prisma.chapter.findMany({
-            where: {
-                book_id: req.params.id
-            }
-        });
-        res.status(200).json({
-            status: "success",
-            data: { chapter }
-        });
-    } catch (err) {
-        res.status(404).json({
-            status: "fail",
-            message: err
-        });
-    }
-};
-
-exports.getChapterByChapterID = async (req, res) => {
-    try {
         const chapter = await prisma.chapter.findUnique({
             where: {
                 chapter_id: req.params.id

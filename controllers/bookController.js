@@ -169,3 +169,22 @@ exports.deleteBook = async (req, res) => {
         })
     }
 }
+
+exports.getBookChapters = async (req, res) => {
+    try {
+        const chapters = await prisma.chapter.findMany({
+            where: {
+                book_id: req.params.id
+            }
+        });
+        res.status(200).json({
+            status: "success",
+            data: { chapter: chapters }
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: "fail",
+            message: err
+        });
+    }
+}
