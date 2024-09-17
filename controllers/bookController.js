@@ -23,16 +23,16 @@ exports.getAllBooks = async (req, res) => {
 
 exports.getTopRatedBooks = async (req, res) => {
     try {
-        const books = await prisma.book.findMany({
-            where: {
-                is_published: true
-            },
-            orderBy: [
-                {
-                    rating: 'desc'
-                }
-            ]
-        });
+        const books = await prisma.$queryRaw`
+            WITH ratings AS (
+                SELECT book_id, AVG(book_rating) AS rating
+                FROM book_comment
+                GROUP BY book_id
+            )
+            SELECT b.*, COALESCE(r.rating, 0) AS book_rating FROM Book b
+            LEFT JOIN ratings r ON b.book_id = r.book_id
+            ORDER BY book_rating DESC
+        `
         res.status(200).json({
         status: 'success',
         results: books.length,
