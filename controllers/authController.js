@@ -10,11 +10,22 @@ exports.signUp = async (req, res) => {
                 account_name: req.body.account_name,
                 email: req.body.email,
                 account_password: req.body.account_password,
-                password_changed_at: req.body.password_changed_at
+                password_changed_at: req.body.password_changed_at,
+                account_author_group_member: {
+                    create: {
+                        author_group: {
+                            create: {
+                                author_group_name: req.body.account_name,
+                                author_group_is_single: true,
+                            }
+                        }
+                    }
+                }
             }
         });
         createAndSendToken(newUser, 201, res)
     } catch (err) {
+        console.log(err)
         if (err instanceof PrismaClientKnownRequestError) {
             console.log(err)
             res.status(400).json({

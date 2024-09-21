@@ -2,7 +2,11 @@ const prisma = require('../lib/prisma');
 
 exports.getAllBooks = async (req, res) => {
     try {
-        const books = await prisma.book.findMany();
+        delete req.query.is_published;
+        let filters = {...req.query, is_published: true}
+        const books = await prisma.book.findMany({
+            where: filters
+        });
         res.status(200).json({
             status: 'success',
             results: books.length,
@@ -19,20 +23,22 @@ exports.getAllBooks = async (req, res) => {
 
 exports.getTopRatedBooks = async (req, res) => {
     try {
-        const books = await prisma.book.findMany({
-            orderBy: [
-                {
-                    rating: 'desc'
-                }
-            ]
-        });
+        const books = await prisma.$queryRaw`
+            WITH ratings AS (
+                SELECT book_id, AVG(book_rating) AS rating
+                FROM book_comment
+                GROUP BY book_id
+            )
+            SELECT b.*, COALESCE(r.rating, 0) AS book_rating FROM Book b
+            LEFT JOIN ratings r ON b.book_id = r.book_id
+            ORDER BY book_rating DESC
+        `
         res.status(200).json({
         status: 'success',
         results: books.length,
         data: {books}
         })
     } catch(err) {
-        console.log(err)
         res.status(404).json({
             statue: "fail",
             message: err
@@ -44,6 +50,9 @@ exports.getTopRatedBooks = async (req, res) => {
 exports.getLatestBooks = async (req, res) => {
     try {
         const books = await prisma.book.findMany({
+            where: {
+                is_published: true
+            },
             orderBy: [
                 {
                     created_on: 'desc'
@@ -70,8 +79,12 @@ exports.createBook = async (req, res) => {
         let book = {...req.body, book_genre: {
             create: genres.map(genre => {
                 return {genre_id: genre}
-            })
+            }),
+            book_image_url: '/img/default-book.jpeg'
         }};
+        if (!('book_image_url' in book)) {
+            book = {...req.body, book_image_url: '/img/default-book.jpeg'}
+        }
         const newBook = await prisma.book.create({
             data: book
         })
@@ -158,5 +171,24 @@ exports.deleteBook = async (req, res) => {
             statue: "fail",
             message: err
         })
+    }
+}
+
+exports.getBookChapters = async (req, res) => {
+    try {
+        const chapters = await prisma.chapter.findMany({
+            where: {
+                book_id: req.params.id
+            }
+        });
+        res.status(200).json({
+            status: "success",
+            data: { chapter: chapters }
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: "fail",
+            message: err
+        });
     }
 }

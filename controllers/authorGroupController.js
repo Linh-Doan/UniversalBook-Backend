@@ -98,7 +98,6 @@ exports.getAuthorGroupsByAccountId = async (req, res) => {
             })
         }
     } catch(err) {
-        console.log('In 99')
         res.status(404).json({
             statue: "fail",
             message: err
