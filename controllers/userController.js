@@ -87,6 +87,12 @@ exports.getCurrentUser = async(req, res) =>{
         const decoded = jwt.verify(token, process.env.JWT_SECRET);  
         var userId = decoded.id;
         const user = await prisma.account.findUnique({
+            include: {
+                account_author_group_member: {select: {author_group: true}},
+                user_role: true,
+                user_role_id: false,
+                account_password: false
+            },
             where: {
                 account_id: userId
             }
