@@ -121,7 +121,8 @@ const main = async () => {
         update: {},
         create: {
             author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
-            author_group_name: 'Inkwell Society'
+            author_group_name: 'Inkwell Society',
+            author_group_image_url: '/img/default-author-group.jpeg'
         }
     });
 
@@ -130,7 +131,8 @@ const main = async () => {
         update: {},
         create: {
             author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f42',
-            author_group_name: 'Writers Circle'
+            author_group_name: 'Writers Circle',
+            author_group_image_url: '/img/default-author-group.jpeg'
         }
     });
 
