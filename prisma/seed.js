@@ -1,6 +1,16 @@
 const prisma = require('../lib/prisma');
 
 const main = async () => {
+    const lifeAdvice = await prisma.genre.upsert({
+        where: { genre_id: '4709fa38-ab8e-4b01-af09-d947357014a2' },
+        update: {},
+        create: {
+            genre_id: '4709fa38-ab8e-4b01-af09-d947357014a2',
+            genre_name: 'Life Advice',
+            genre_image_url: '/img/genre_self-help.png',
+            genre_rating: 4
+        }
+    });
     const fiction = await prisma.genre.upsert({
         where: { genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608' },
         update: {},
