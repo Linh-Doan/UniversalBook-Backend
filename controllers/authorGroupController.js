@@ -80,10 +80,10 @@ exports.getAuthorGroup = async(req, res) => {
 
 exports.getAuthorGroupsByAccountId = async (req, res) => {
     try {
-        if (req.query.account_id ) {
+        if (req.params.id ) {
             const relationships = await prisma.account_author_group_member.findMany({
                 where: {
-                    account_id: req.query.account_id
+                    account_id: req.params.id
                 },
                 include: {
                     author_group: true

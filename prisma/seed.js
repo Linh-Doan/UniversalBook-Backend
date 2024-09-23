@@ -89,6 +89,17 @@ const main = async () => {
         }
     });
 
+    const lifeAdvice = await prisma.genre.upsert({
+        where: { genre_id: 'e2b3e31b-9b2e-4b2c-a8d2-b5e3c91c2188' },
+        update: {},
+        create: {
+            genre_id: 'e2b3e31b-9b2e-4b2c-a8d2-b5e3c91c2188',
+            genre_name: 'Life advice',
+            genre_image_url: '/img/genre_life_advice.png',
+            genre_rating: 9
+        }
+    });
+
     const adminRole = await prisma.user_role.upsert({
         where: {user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f"},
         update: {},

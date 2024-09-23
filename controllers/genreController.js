@@ -215,25 +215,15 @@ exports.deleteGenre = async (req, res) => {
 exports.getTrendingGenres = async (req, res) => {
     try {
         const trendingGenres = await prisma.genre.findMany({
-            where: {
-                account_genre_follow: {
-                    some: {
-                        last_followed_on: {
-                            gte: new Date(new Date().setDate(new Date().getDate() - 19))
-                        }
-                    }
-                }
-            },
+            orderBy: [
+                { created_on: 'desc' },  // Sort by newest
+            ],
             include: {
                 _count: {
                     select: { account_genre_follow: true }
                 }
             },
-            orderBy: {
-                account_genre_follow: {
-                    _count: 'desc'
-                }
-            }
+            take: 10
         });
         res.status(200).json({
             status: 'success',
