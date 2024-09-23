@@ -29,10 +29,14 @@ exports.getAllAuthorGroups = async (req, res, next) => {
 
 exports.createAuthorGroup = async (req, res) => {
     try {
+        let authorGroup = req.body;
+        if (!('author_group_image_url' in authorGroup)) {
+            authorGroup = {...authorGroup, author_group_image_url: '/img/default-author-group.jpeg'}
+        }
         const newAuthorGroup = await prisma.author_group.create({
-            data: req.body
-    
+            data: authorGroup
         })
+        
         res.status(200).json({
             status: 'success',
             data: {

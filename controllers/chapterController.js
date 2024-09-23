@@ -63,13 +63,20 @@ exports.getLatestChapters = async (req, res) => {
 
 exports.createChapter = async (req, res) => {
     try {
-        const chapter = await prisma.chapter.create({
-            data: req.body
+        let chapter = req.body;
+        console.log(chapter)
+        if (chapter.chapter_image_url.length == 0) {
+            const randomImage = Math.random() < 0.5 ? '/img/chapter1.png' : '/img/chapter2.png';
+            chapter = {...chapter, chapter_image_url: randomImage};
+        }
+        
+        const newChapter = await prisma.chapter.create({
+            data: chapter
         });
         res.status(201).json({
             status: 'success',
             data: {
-                chapter
+                newChapter
             }
         });
     } catch (err) {

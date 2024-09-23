@@ -10,6 +10,8 @@ router
 
 router.route('/top-rated').get(bookController.getTopRatedBooks);
 router.route('/latest').get(bookController.getLatestBooks);
+router.route('/genre/:id').get(bookController.getBooksByGenre);
+
 router
     .route('/:id')
     .get(authController.protect, bookController.getBook)

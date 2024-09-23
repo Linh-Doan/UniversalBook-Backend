@@ -1,6 +1,16 @@
 const prisma = require('../lib/prisma');
 
 const main = async () => {
+    const lifeAdvice = await prisma.genre.upsert({
+        where: { genre_id: '4709fa38-ab8e-4b01-af09-d947357014a2' },
+        update: {},
+        create: {
+            genre_id: '4709fa38-ab8e-4b01-af09-d947357014a2',
+            genre_name: 'Life Advice',
+            genre_image_url: '/img/genre_self-help.png',
+            genre_rating: 4
+        }
+    });
     const fiction = await prisma.genre.upsert({
         where: { genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608' },
         update: {},
@@ -121,7 +131,8 @@ const main = async () => {
         update: {},
         create: {
             author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
-            author_group_name: 'Inkwell Society'
+            author_group_name: 'Inkwell Society',
+            author_group_image_url: '/img/default-author-group.jpeg'
         }
     });
 
@@ -130,7 +141,8 @@ const main = async () => {
         update: {},
         create: {
             author_group_id: '8876bea8-fa6f-4672-8333-77d3f8133f42',
-            author_group_name: 'Writers Circle'
+            author_group_name: 'Writers Circle',
+            author_group_image_url: '/img/default-author-group.jpeg'
         }
     });
 

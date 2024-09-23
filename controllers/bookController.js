@@ -21,6 +21,34 @@ exports.getAllBooks = async (req, res) => {
     
 }
 
+// Get all books for a specific genre
+exports.getBooksByGenre = async (req, res) => {
+    try {
+        const genreId = req.params.id;  // Assuming the genre ID is passed as a route parameter
+
+        const books = await prisma.book.findMany({
+            where: {
+                is_published: true,
+                book_genre: {
+                    some: {
+                        genre_id: genreId
+                    }
+                }
+            }
+        });
+        res.status(200).json({
+            status: 'success',
+            results: books.length,
+            data: { books }
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: err.message
+        });
+    }
+};
+
 exports.getTopRatedBooks = async (req, res) => {
     try {
         const books = await prisma.$queryRaw`
