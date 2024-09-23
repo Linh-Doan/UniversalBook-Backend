@@ -65,7 +65,7 @@ exports.createChapter = async (req, res) => {
     try {
         let chapter = req.body;
         console.log(chapter)
-        if (chapter.chapter_image_url.length == 0) {
+        if (!chapter.chapter_image_url) {
             const randomImage = Math.random() < 0.5 ? '/img/chapter1.png' : '/img/chapter2.png';
             chapter = {...chapter, chapter_image_url: randomImage};
         }

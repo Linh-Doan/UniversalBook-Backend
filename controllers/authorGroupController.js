@@ -95,7 +95,6 @@ exports.getAuthorGroupsByAccountId = async (req, res) => {
                 data: {authorGroups: authorGroups}
             });
         } else {
-            console.log('In 92')
             res.status(400).json({
                 status: 'error',
                 message: 'Invalid data sent'
