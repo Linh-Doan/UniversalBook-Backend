@@ -14,4 +14,8 @@ router
     .patch(authorGroupController.updateAuthorGroup)
     .delete(authorGroupController.deleteAuthorGroup);
 
+router
+    .route('/account/:id')
+    .get(authorGroupController.getAuthorGroupsByAccountId);
+
 module.exports = router

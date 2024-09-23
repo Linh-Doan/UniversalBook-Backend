@@ -1,16 +1,6 @@
 const prisma = require('../lib/prisma');
 
 const main = async () => {
-    const lifeAdvice = await prisma.genre.upsert({
-        where: { genre_id: '4709fa38-ab8e-4b01-af09-d947357014a2' },
-        update: {},
-        create: {
-            genre_id: '4709fa38-ab8e-4b01-af09-d947357014a2',
-            genre_name: 'Life Advice',
-            genre_image_url: '/img/genre_self-help.png',
-            genre_rating: 4
-        }
-    });
     const fiction = await prisma.genre.upsert({
         where: { genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608' },
         update: {},
@@ -96,6 +86,17 @@ const main = async () => {
             genre_name: 'Historical',
             genre_image_url: '/img/genre_historical.png',
             genre_rating: 4
+        }
+    });
+
+    const lifeAdvice = await prisma.genre.upsert({
+        where: { genre_id: 'e2b3e31b-9b2e-4b2c-a8d2-b5e3c91c2188' },
+        update: {},
+        create: {
+            genre_id: 'e2b3e31b-9b2e-4b2c-a8d2-b5e3c91c2188',
+            genre_name: 'Life advice',
+            genre_image_url: '/img/genre_life_advice.png',
+            genre_rating: 9
         }
     });
 
