@@ -412,6 +412,51 @@ const main = async () => {
         },
     });
     
+    const book18 = await prisma.book.create({
+        data: {
+            book_id: 'df3d40f0-efcd-4d16-b803-c5b0b31b767d',
+            book_name: 'The Silent Predator',
+            author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+            book_image_url: '/img/book13.jpg',
+            is_published: true,
+            summary_text: 'In the dead of night, a silent predator hunts down its prey in the shadows of a bustling metropolis. Detective Elena must piece together the clues before the predator strikes again.',
+        },
+    });
+    
+    const book19 = await prisma.book.create({
+        data: {
+            book_id: 'df3d40f0-7acd-4d16-b803-c5b0b31b767d',
+            book_name: 'Whispers in the Fog',
+            author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+            book_image_url: '/img/book14.jpg',
+            is_published: true,
+            summary_text: 'A small town shrouded in fog holds deep secrets. When a young journalist starts investigating a series of unsolved disappearances, she uncovers a truth that’s darker than anyone imagined.',
+        },
+    });
+    
+    const book20 = await prisma.book.create({
+        data: {
+            book_id: 'df3d40f0-1b2a-4d16-b803-c5b0b31b767d',
+            book_name: 'Love Across the Divide',
+            author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+            book_image_url: '/img/book15.jpg',
+            is_published: true,
+            summary_text: 'A forbidden romance blossoms between two people on opposite sides of a century-old feud. As tensions rise, they must fight for their love amidst the chaos of their divided world.',
+        },
+    });
+    
+    const book21 = await prisma.book.create({
+        data: {
+            book_id: 'df3d40f0-3e21-4d16-b803-c5b0b31b767d',
+            book_name: 'The Haunted Asylum',
+            author_group_id: '6ecd8c99-4036-403d-bf84-cf8400f67836',
+            book_image_url: '/img/book16.jpg',
+            is_published: true,
+            summary_text: 'A group of paranormal investigators enters an abandoned asylum, but what they find is far worse than ghosts. As the walls close in, they must escape before becoming part of the asylum’s dark history.',
+        },
+    });
+    
+          
     const bookgenre1 =  await prisma.book_genre.upsert({
         where: {
             book_id_genre_id: {
@@ -492,6 +537,64 @@ const main = async () => {
             genre_id: "30b8e11f-c632-472a-b58a-5dd3c31ab018"
         }
     });
+
+    
+    const bookgenre7 = await prisma.book_genre.upsert({
+        where: {
+            book_id_genre_id: {
+                book_id: book18.book_id,
+                genre_id: 'ac1d213b-9d2b-473e-b1c2-a11f1e9b2423'   
+            }
+        },
+        update: {},
+        create: {
+            book_id: book18.book_id,
+            genre_id: 'ac1d213b-9d2b-473e-b1c2-a11f1e9b2423'
+        }
+    });
+    
+    const bookgenre8 = await prisma.book_genre.upsert({
+        where: {
+            book_id_genre_id: {
+                book_id: book19.book_id,
+                genre_id: 'c2b8e21f-9c1d-4422-aeca-f3d3b18f4583'  
+            }
+        },
+        update: {},
+        create: {
+            book_id: book19.book_id,
+            genre_id: 'c2b8e21f-9c1d-4422-aeca-f3d3b18f4583'
+        }
+    });
+
+    const bookgenre9 = await prisma.book_genre.upsert({
+        where: {
+            book_id_genre_id: {
+                book_id: book20.book_id,
+                genre_id: '51d3138e-1d3b-41c2-b2c1-9f8d7e9c2434'   
+            }
+        },
+        update: {},
+        create: {
+            book_id: book20.book_id,
+            genre_id: '51d3138e-1d3b-41c2-b2c1-9f8d7e9c2434'
+        }
+    });
+
+    const bookgenre10 = await prisma.book_genre.upsert({
+        where: {
+            book_id_genre_id: {
+                book_id: book21.book_id,
+                genre_id: 'db4e921c-1c3e-43c2-b3c2-c5f8f9e9d234'   
+            }
+        },
+        update: {},
+        create: {
+            book_id: book21.book_id,
+            genre_id: 'db4e921c-1c3e-43c2-b3c2-c5f8f9e9d234'
+        }
+    });
+    
 
     // Chapters for The Luminous Veil (book1)
     const chapter1  = await prisma.chapter.create({
