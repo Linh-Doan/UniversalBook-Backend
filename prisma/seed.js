@@ -100,6 +100,160 @@ const main = async () => {
         }
     });
 
+    const spirituality = await prisma.genre.upsert({
+        where: { genre_id: 'f1d3e1b4-8a1e-46b9-bdf9-d6a1b36e5319' },
+        update: {},
+        create: {
+            genre_id: 'f1d3e1b4-8a1e-46b9-bdf9-d6a1b36e5319',
+            genre_name: 'Spirituality',
+            genre_image_url: '/img/spirituality.png',
+            genre_rating: 7
+        }
+    });
+
+    const trueCrime = await prisma.genre.upsert({
+        where: { genre_id: '9f2e5c68-6b57-498d-bd13-fb1e872bb682' },
+        update: {},
+        create: {
+            genre_id: '9f2e5c68-6b57-498d-bd13-fb1e872bb682',
+            genre_name: 'True Crime',
+            genre_image_url: '/img/true_crime.png',
+            genre_rating: 9
+        }
+    });
+
+    const adventure = await prisma.genre.upsert({
+        where: { genre_id: 'f2a9f2b8-d7d9-4b6d-91e9-5d4e2a7d5df5' },
+        update: {},
+        create: {
+            genre_id: 'f2a9f2b8-d7d9-4b6d-91e9-5d4e2a7d5df5',
+            genre_name: 'Adventure',
+            genre_image_url: '/img/adventure.png',
+            genre_rating: 5
+        }
+    });
+
+    const psychologicalThriller = await prisma.genre.upsert({
+        where: { genre_id: 'c7d4f9e1-024a-4b72-812b-6c43b2b4f392' },
+        update: {},
+        create: {
+            genre_id: 'c7d4f9e1-024a-4b72-812b-6c43b2b4f392',
+            genre_name: 'Psychological Thriller',
+            genre_image_url: '/img/psychological_thriller.png',
+            genre_rating: 5
+        }
+    });
+
+    const biography = await prisma.genre.upsert({
+        where: { genre_id: 'd2b5b7b7-3b1a-4d88-85b5-fc8a257a6d93' },
+        update: {},
+        create: {
+            genre_id: 'd2b5b7b7-3b1a-4d88-85b5-fc8a257a6d93',
+            genre_name: 'Biography',
+            genre_image_url: '/img/biography.png',
+            genre_rating: 8
+        }
+    });
+
+    const historicalFiction = await prisma.genre.upsert({
+        where: { genre_id: '3e5c81f9-71ea-4d84-a6e8-2b4f77f6d4b3' },
+        update: {},
+        create: {
+            genre_id: '3e5c81f9-71ea-4d84-a6e8-2b4f77f6d4b3',
+            genre_name: 'Historical Fiction',
+            genre_image_url: '/img/historical_fiction.png',
+            genre_rating: 6
+        }
+    });
+
+    const selfHelp = await prisma.genre.upsert({
+        where: { genre_id: '2b3d5c8b-1d2e-4e75-9957-3c9d2e9cbb34' },
+        update: {},
+        create: {
+            genre_id: '2b3d5c8b-1d2e-4e75-9957-3c9d2e9cbb34',
+            genre_name: 'Self-Help',
+            genre_image_url: '/img/self_help.png',
+            genre_rating: 8
+        }
+    });
+
+    const epicFantasy = await prisma.genre.upsert({
+        where: { genre_id: '7c4a51f2-4b6e-47ad-96d1-d5a2b9c74824' },
+        update: {},
+        create: {
+            genre_id: '7c4a51f2-4b6e-47ad-96d1-d5a2b9c74824',
+            genre_name: 'Epic Fantasy',
+            genre_image_url: '/img/epic_fantasy.png',
+            genre_rating: 9
+        }
+    });
+
+    const dystopian = await prisma.genre.upsert({
+        where: { genre_id: '5d3b6e91-7851-4f5f-9b24-0d5a61a8c43e' },
+        update: {},
+        create: {
+            genre_id: '5d3b6e91-7851-4f5f-9b24-0d5a61a8c43e',
+            genre_name: 'Dystopian',
+            genre_image_url: '/img/dystopian.png',
+            genre_rating: 7
+        }
+    });
+    
+    const scienceNonFiction = await prisma.genre.upsert({
+        where: { genre_id: 'd4f67e39-5bc3-487c-9731-e0b9dbd6a340' },
+        update: {},
+        create: {
+            genre_id: 'd4f67e39-5bc3-487c-9731-e0b9dbd6a340',
+            genre_name: 'Science Non-Fiction',
+            genre_image_url: '/img/science_nonfiction.png',
+            genre_rating: 9
+        }
+    });
+
+    const poetry = await prisma.genre.upsert({
+        where: { genre_id: 'e7c8f521-9b6c-4767-8a54-76d1e65b3f0f' },
+        update: {},
+        create: {
+            genre_id: 'e7c8f521-9b6c-4767-8a54-76d1e65b3f0f',
+            genre_name: 'Poetry',
+            genre_image_url: '/img/poetry.png',
+            genre_rating: 8
+        }
+    });
+    
+    const classicalLiterature = await prisma.genre.upsert({
+        where: { genre_id: 'd8a4b6d3-6e7a-4fba-b7e2-c7a2a9e4f91e' },
+        update: {},
+        create: {
+            genre_id: 'd8a4b6d3-6e7a-4fba-b7e2-c7a2a9e4f91e',
+            genre_name: 'Classical Literature',
+            genre_image_url: '/img/classical_literature.png',
+            genre_rating: 8
+        }
+    });
+    
+    const philosophy = await prisma.genre.upsert({
+        where: { genre_id: 'a9f5c7e8-1d2b-4f1e-b5c7-9a8b6f9c72d5' },
+        update: {},
+        create: {
+            genre_id: 'a9f5c7e8-1d2b-4f1e-b5c7-9a8b6f9c72d5',
+            genre_name: 'Philosophy',
+            genre_image_url: '/img/philosophy.png',
+            genre_rating: 8
+        }
+    });
+
+    const humanScience = await prisma.genre.upsert({
+        where: { genre_id: 'b2c6f5d9-3e8f-4a57-a9d2-4b8d3f6e1f23' },
+        update: {},
+        create: {
+            genre_id: 'b2c6f5d9-3e8f-4a57-a9d2-4b8d3f6e1f23',
+            genre_name: 'Human Science',
+            genre_image_url: '/img/human_science.png',
+            genre_rating: 9
+        }
+    });
+    
     const adminRole = await prisma.user_role.upsert({
         where: {user_role_id: "2e6f32c1-43b0-49df-8181-52ad541cd23f"},
         update: {},
