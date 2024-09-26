@@ -353,6 +353,47 @@ const main = async () => {
         }
     });
 
+    //Chapter contents
+    const chapterContent1 = {
+        chapter_name: 'Chapter 1: The Call of the Veil',
+        chapter_sequence: 1,
+        chapter_content: 'In the quiet village of Elowen, the young sorceress Elara has always felt a strange connection to the nearby Enchanted Woods. Whispers from her grandmother told of a mysterious Luminous Veil deep within the forest, separating the human world from a forgotten realm. One fateful autumn evening, driven by curiosity and an unshakable yearning, Elara sets off to uncover the truth behind the tales.',
+        chapter_rating: 4,
+        chapter_image_url: '/img/book1.jpeg',
+        created_on: new Date(),
+    }
+    const chapterContent2 = {
+        chapter_name: 'Chapter 2: Crossing the Threshold',
+        chapter_sequence: 2,
+        chapter_content: 'The forest grew denser, the air thick with ancient magic. Elara’s heartbeat quickened as the light began to shift, glowing brighter with each step. Finally, she arrived at the shimmering curtain of light — the Luminous Veil. With trembling hands, she touched the veil, and the world around her dissolved into a cascade of colors. She was no longer in the realm of men, but in a place where dreams and nightmares intertwined.',
+        chapter_rating: 3,
+        chapter_image_url: '/img/book1.jpeg',
+        created_on: new Date(),
+    }
+    const chapterContent3 = {
+        chapter_name: 'Chapter 3: Into the Realm of Light',
+        chapter_sequence: 3,
+        chapter_content: 'Elara found herself in a world of breathtaking beauty, where the sky shimmered with shades of gold and lavender, and the trees whispered secrets from long-forgotten ages. But something was wrong. Shadows lurked at the edges of her vision, and a strange presence seemed to be watching her. Her journey through the Realm of Light had only just begun, and already the dangers were closing in.',
+        chapter_rating: 4,
+        chapter_image_url: '/img/book1.jpeg',
+        created_on: new Date(),
+    }
+    const chapterContent4 = {
+        chapter_name: 'Chapter 4: The Guardian of the Veil',
+        chapter_sequence: 4,
+        chapter_content: 'As Elara ventured deeper, she encountered the Guardian of the Veil, a towering figure cloaked in robes of light. The Guardian spoke in riddles, warning her of the perils that lay ahead and the price she would have to pay for crossing into this realm. Elara, determined to find the truth, vowed to continue, though the weight of the Guardian’s words hung heavy in her heart.',
+        chapter_rating: 5,
+        chapter_image_url: '/img/book1.jpeg',
+        created_on: new Date(),
+    }
+    const chapterContent5 = {
+        chapter_name: 'Chapter 5: The Shadows Awaken',
+        chapter_sequence: 5,
+        chapter_content: 'Elara soon discovered that she was not alone. The shadows that had haunted her were more than just illusions. Dark creatures, born of forgotten nightmares, began to emerge from the edges of the veil, their eyes glowing with malice. Elara’s magic was tested as she fought to defend herself, but the shadows were relentless, and she knew that this was only the beginning.',
+        chapter_rating: 4,
+        chapter_image_url: '/img/book1.jpeg',
+        created_on: new Date(),
+    }
 
     const book1 = await prisma.book.create({
         data: {
@@ -402,7 +443,10 @@ const main = async () => {
             // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book3.jpeg',
             is_published: true,
-            summary_text: 'In a realm woven from dreams, a weaver\'s creation goes rogue, threatening the fabric of reality. She must navigate the dreamscape to reclaim control and restore balance.'
+            summary_text: 'In a realm woven from dreams, a weaver\'s creation goes rogue, threatening the fabric of reality. She must navigate the dreamscape to reclaim control and restore balance.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book4 = await prisma.book.create({
@@ -413,7 +457,10 @@ const main = async () => {
             book_image_url: '/img/book4.jpeg',
             is_published: true,
             created_on:  new Date(2023, 5, 17),
-            summary_text: 'An ancient prophecy foretells the rise of a hero marked by a crimson sun. A reluctant warrior must embrace his destiny to save his kingdom from an impending apocalypse.'
+            summary_text: 'An ancient prophecy foretells the rise of a hero marked by a crimson sun. A reluctant warrior must embrace his destiny to save his kingdom from an impending apocalypse.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book5 = await prisma.book.create({
@@ -424,7 +471,10 @@ const main = async () => {
             book_image_url: '/img/book5.jpeg',
             is_published: true,
             created_on:  new Date(2024, 3, 12),
-            summary_text: 'Deep within a mystical cavern, crystalline echoes reveal forgotten histories and hidden dangers. A brave explorer uncovers a secret that could reshape her world\'s future.'
+            summary_text: 'Deep within a mystical cavern, crystalline echoes reveal forgotten histories and hidden dangers. A brave explorer uncovers a secret that could reshape her world\'s future.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book6 = await prisma.book.create({
@@ -434,7 +484,10 @@ const main = async () => {
             // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book6.jpeg',
             is_published: true,
-            summary_text: 'Unearthed manuscripts recount the adventures of a long-lost civilization. A historian\'s obsession with these chronicles leads her on a perilous quest for truth and legacy.'
+            summary_text: 'Unearthed manuscripts recount the adventures of a long-lost civilization. A historian\'s obsession with these chronicles leads her on a perilous quest for truth and legacy.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book7 = await prisma.book.create({
@@ -444,7 +497,10 @@ const main = async () => {
             // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book7.jpeg',
             is_published: true,
-            summary_text: 'In a land where the aurora\'s colors dictate life and death, a mute painter discovers a way to communicate through her art. Her creations might be the key to ending a silent war.'
+            summary_text: 'In a land where the aurora\'s colors dictate life and death, a mute painter discovers a way to communicate through her art. Her creations might be the key to ending a silent war.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book8 = await prisma.book.create({
@@ -455,7 +511,10 @@ const main = async () => {
             book_image_url: '/img/book8.jpeg',
             is_published: true,
             created_on:  new Date(2023, 9, 12),
-            summary_text: 'A mysterious raven guides a grieving knight to uncover a conspiracy against the throne. As whispers of rebellion grow louder, he must decide whom to trust in his quest for justice.'
+            summary_text: 'A mysterious raven guides a grieving knight to uncover a conspiracy against the throne. As whispers of rebellion grow louder, he must decide whom to trust in his quest for justice.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book9 = await prisma.book.create({
@@ -466,7 +525,10 @@ const main = async () => {
             book_image_url: '/img/book9.jpeg',
             is_published: true,
             created_on:  new Date(2022, 3, 12),
-            summary_text: 'An enchanted key made of obsidian unlocks doorways to parallel worlds. A young adventurer must navigate these realms to prevent a malevolent force from conquering them all.'
+            summary_text: 'An enchanted key made of obsidian unlocks doorways to parallel worlds. A young adventurer must navigate these realms to prevent a malevolent force from conquering them all.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book10 = await prisma.book.create({
@@ -477,7 +539,10 @@ const main = async () => {
             book_image_url: '/img/book10.jpeg',
             is_published: true,
             created_on:  new Date(2024, 2, 12),
-            summary_text: 'When an eternal eclipse shrouds her world, a daring aviator seeks the source of the darkness. She discovers ancient powers and must rally unlikely allies to bring back the light.'
+            summary_text: 'When an eternal eclipse shrouds her world, a daring aviator seeks the source of the darkness. She discovers ancient powers and must rally unlikely allies to bring back the light.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book11 = await prisma.book.create({
@@ -488,7 +553,10 @@ const main = async () => {
             book_image_url: '/img/book11.jpeg',
             is_published: true,
             created_on:  new Date(2024, 5, 12),
-            summary_text: 'A magical compass that once guided travelers to hidden treasures is shattered, scattering its pieces across the land. A determined treasure hunter embarks on a quest to reunite them.'
+            summary_text: 'A magical compass that once guided travelers to hidden treasures is shattered, scattering its pieces across the land. A determined treasure hunter embarks on a quest to reunite them.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book12 = await prisma.book.create({
@@ -498,7 +566,10 @@ const main = async () => {
             // genre_id: '40e6215d-b5c6-4896-987c-f30f3678f608',
             book_image_url: '/img/book12.jpeg',
             is_published: true,
-            summary_text: 'In a forest cloaked in perpetual mist, guardians protect secrets of immense power. A curious outsider stumbles into their realm, triggering events that could either protect or destroy their world.'
+            summary_text: 'In a forest cloaked in perpetual mist, guardians protect secrets of immense power. A curious outsider stumbles into their realm, triggering events that could either protect or destroy their world.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         }
     });
     const book13 = await prisma.book.create({
@@ -511,6 +582,9 @@ const main = async () => {
             is_published: true,
             summary_text:
             'A young sorceress discovers a hidden dimension behind a veil of light, unlocking ancient secrets and untold power. Her journey unveils truths that could alter the fate of her world.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         },
     });
         
@@ -524,6 +598,9 @@ const main = async () => {
             is_published: true,
             summary_text:
             'In a galaxy where music controls the stars, a rogue bard must harness this cosmic symphony to prevent an interstellar war. His melodies hold the key to unity or destruction.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         },
     });
 
@@ -574,6 +651,9 @@ const main = async () => {
             book_image_url: '/img/book13.jpg',
             is_published: true,
             summary_text: 'In the dead of night, a silent predator hunts down its prey in the shadows of a bustling metropolis. Detective Elena must piece together the clues before the predator strikes again.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         },
     });
     
@@ -585,6 +665,9 @@ const main = async () => {
             book_image_url: '/img/book14.jpg',
             is_published: true,
             summary_text: 'A small town shrouded in fog holds deep secrets. When a young journalist starts investigating a series of unsolved disappearances, she uncovers a truth that’s darker than anyone imagined.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         },
     });
     
@@ -596,6 +679,9 @@ const main = async () => {
             book_image_url: '/img/book15.jpg',
             is_published: true,
             summary_text: 'A forbidden romance blossoms between two people on opposite sides of a century-old feud. As tensions rise, they must fight for their love amidst the chaos of their divided world.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         },
     });
     
@@ -607,6 +693,9 @@ const main = async () => {
             book_image_url: '/img/book16.jpg',
             is_published: true,
             summary_text: 'A group of paranormal investigators enters an abandoned asylum, but what they find is far worse than ghosts. As the walls close in, they must escape before becoming part of the asylum’s dark history.',
+            chapter: {
+                create: [chapterContent1, chapterContent2, chapterContent3, chapterContent4, chapterContent5]
+            }
         },
     });
     

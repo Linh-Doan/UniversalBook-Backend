@@ -31,7 +31,6 @@ exports.getTopRatedChapters = async (req, res) => {
             data: { chapters }
         });
     } catch (err) {
-        console.log(err)
         res.status(404).json({
             status: "fail",
             message: err
@@ -64,7 +63,6 @@ exports.getLatestChapters = async (req, res) => {
 exports.createChapter = async (req, res) => {
     try {
         let chapter = req.body;
-        console.log(chapter)
         if (!chapter.chapter_image_url) {
             const randomImage = Math.random() < 0.5 ? '/img/chapter1.png' : '/img/chapter2.png';
             chapter = {...chapter, chapter_image_url: randomImage};
