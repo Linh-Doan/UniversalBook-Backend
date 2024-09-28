@@ -55,4 +55,10 @@ io.on("connection", (socket) => {
             changeCache.delete(chapterId);
         }
     });
+
+    socket.on("publish", (userName) => {
+        console.log(`${chapterId} saved, asking every client to refresh page`);
+        changeCache.get(chapterId).changes = new Delta();
+        socket.to(chapterId).emit("publish", userName);
+    })
 });
