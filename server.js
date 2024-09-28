@@ -3,7 +3,20 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = require('./app');
+const {Server} = require('socket.io');
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`App running on port ${port}`)
+})
+
+const io = new Server(server);
+
+io.on("connection", (socket) => {
+    const chapterId = socket.handshake.query.chapterId;
+
+    socket.join(chapterId);
+
+    socket.on("change", (arg) => {
+        socket.to(chapterId).emit("change", arg);
+    });
 })
