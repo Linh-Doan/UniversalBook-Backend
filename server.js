@@ -9,14 +9,19 @@ const server = app.listen(port, () => {
     console.log(`App running on port ${port}`)
 })
 
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {credentials: true, origin: process.env.FRONT_END_URL}}
+);
 
 io.on("connection", (socket) => {
     const chapterId = socket.handshake.query.chapterId;
 
     socket.join(chapterId);
 
+    console.log("new client for room", socket.handshake.query.chapterId)
+
     socket.on("change", (arg) => {
+        console.log("broadcasting to " + chapterId + " " + JSON.stringify(arg))
         socket.to(chapterId).emit("change", arg);
     });
 })
