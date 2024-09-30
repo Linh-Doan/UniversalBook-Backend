@@ -102,14 +102,7 @@ exports.getLatestBooks = async (req, res) => {
 
 exports.createBook = async (req, res) => {
     try {
-        genres = req.body.genres;
-        delete req.body.genres;
-        let book = {...req.body, book_genre: {
-            create: genres.map(genre => {
-                return {genre_id: genre}
-            }),
-            book_image_url: '/img/default-book.jpeg'
-        }};
+        let book = {...req.body};
         if (!('book_image_url' in book)) {
             book = {...req.body, book_image_url: '/img/default-book.jpeg'}
         }
