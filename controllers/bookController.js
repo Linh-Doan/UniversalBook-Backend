@@ -14,8 +14,8 @@ exports.getAllBooks = async (req, res) => {
         })
     } catch(err) {
         res.status(404).json({
-            statue: "fail",
-            message: err
+            status: "fail",
+            message: err.message
         })
     }
     
