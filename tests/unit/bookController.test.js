@@ -24,14 +24,14 @@ describe('Book Controller', () => {
             "original_book_id": null,
             "book_image_url": "/img/book1.jpeg",
             "is_copiable": false,
-            "is_published": false,
+            "is_published": true,
             "is_flagged_inappropriate": false,
             "created_on": "2024-09-01T23:25:56.074Z",
             "rating": "4.3",
             "rating_count": 3
         }]
         prisma.book.findMany.mockResolvedValue(mockBooks);
-        const req = {};
+        const req = {query: {}};
         const res = mockResponse();
   
         await getAllBooks(req, res);
@@ -45,7 +45,7 @@ describe('Book Controller', () => {
     it('should handle errors and return status 404', async () => {
         prisma.book.findMany.mockRejectedValue(new Error('Database error'));
 
-        const req = {}; 
+        const req = {query: {}}; 
         const res = mockResponse();
 
         await getAllBooks(req, res);

@@ -25,7 +25,7 @@ describe('GET /books', () => {
             "original_book_id": null,
             "book_image_url": "/img/book1.jpeg",
             "is_copiable": false,
-            "is_published": false,
+            "is_published": true,
             "is_flagged_inappropriate": false,
             "created_on": "2024-09-01T23:25:56.074Z",
             "rating": "4.3",

@@ -31,7 +31,6 @@ exports.getTopRatedChapters = async (req, res) => {
             data: { chapters }
         });
     } catch (err) {
-        console.log(err)
         res.status(404).json({
             status: "fail",
             message: err
@@ -63,13 +62,19 @@ exports.getLatestChapters = async (req, res) => {
 
 exports.createChapter = async (req, res) => {
     try {
-        const chapter = await prisma.chapter.create({
-            data: req.body
+        let chapter = req.body;
+        if (!chapter.chapter_image_url) {
+            const randomImage = Math.random() < 0.5 ? '/img/chapter1.png' : '/img/chapter2.png';
+            chapter = {...chapter, chapter_image_url: randomImage};
+        }
+        
+        const newChapter = await prisma.chapter.create({
+            data: chapter
         });
         res.status(201).json({
             status: 'success',
             data: {
-                chapter
+                newChapter
             }
         });
     } catch (err) {

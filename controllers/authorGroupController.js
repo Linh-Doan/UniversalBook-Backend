@@ -29,10 +29,14 @@ exports.getAllAuthorGroups = async (req, res, next) => {
 
 exports.createAuthorGroup = async (req, res) => {
     try {
+        let authorGroup = req.body;
+        if (!('author_group_image_url' in authorGroup)) {
+            authorGroup = {...authorGroup, author_group_image_url: '/img/default-author-group.jpeg'}
+        }
         const newAuthorGroup = await prisma.author_group.create({
-            data: req.body
-    
+            data: authorGroup
         })
+        
         res.status(200).json({
             status: 'success',
             data: {
@@ -76,10 +80,10 @@ exports.getAuthorGroup = async(req, res) => {
 
 exports.getAuthorGroupsByAccountId = async (req, res) => {
     try {
-        if (req.query.account_id ) {
+        if (req.params.id ) {
             const relationships = await prisma.account_author_group_member.findMany({
                 where: {
-                    account_id: req.query.account_id
+                    account_id: req.params.id
                 },
                 include: {
                     author_group: true
@@ -91,14 +95,12 @@ exports.getAuthorGroupsByAccountId = async (req, res) => {
                 data: {authorGroups: authorGroups}
             });
         } else {
-            console.log('In 92')
             res.status(400).json({
                 status: 'error',
                 message: 'Invalid data sent'
             })
         }
     } catch(err) {
-        console.log('In 99')
         res.status(404).json({
             statue: "fail",
             message: err
