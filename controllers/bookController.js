@@ -59,6 +59,7 @@ exports.getTopRatedBooks = async (req, res) => {
             )
             SELECT b.*, COALESCE(r.rating, 0) AS book_rating FROM Book b
             LEFT JOIN ratings r ON b.book_id = r.book_id
+            WHERE is_published = true
             ORDER BY book_rating DESC
         `
         res.status(200).json({
